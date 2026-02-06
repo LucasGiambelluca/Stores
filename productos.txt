@@ -1,0 +1,369 @@
+﻿{
+  "tienda": "X MENOS + PRENDAS",
+  "url_base": "https://xmenosmasprendas.com",
+  "datos_extraidos": "2025-12-10",
+  "total_productos": 4,
+  "productos": [
+    {
+      "id": 1,
+      "nombre": "Remera SJ",
+      "url": "https://xmenosmasprendas.com/productos/remera-sj/",
+      "precio_actual": 13640,
+      "precio_original": 16047.06,
+      "descuento_porcentaje": 15,
+      "cuotas": 6,
+      "precio_con_transferencia": 11594,
+      "stock_estado": "Ultima",
+      "imagen_url": "https://acdn-us.mitiendanube.com/stores/005/707/930/products/remera-sj-c347a86785ffa3179917625275948690-1024-1024.webp",
+      "categoria": "ROPA",
+      "subcategoria": "Remeras",
+      "colores": ["Negro", "Blanco"],
+      "talles": ["M", "L", "XL"],
+      "descripcion": "Remera SJ: la pieza clave para cualquier outfit. Diseñada para complementar y elevar tu estilo con facilidad. Su tejido suave y cómodo garantiza una sensación agradable durante todo el dia."
+    },
+    {
+      "id": 2,
+      "nombre": "Remera Boxy Fit",
+      "url": "https://xmenosmasprendas.com/productos/remera-boxy-fit/",
+      "precio_actual": 14630,
+      "precio_original": 17217.65,
+      "descuento_porcentaje": 15,
+      "cuotas": 6,
+      "precio_con_transferencia": 12435.50,
+      "stock_estado": "Ultima",
+      "imagen_url": "https://acdn-us.mitiendanube.com/stores/005/707/930/products/remera-boxy-fit-c347a-8a0e8cbf0a50b15b68b97e0ba9bac0af-1024-1024.webp",
+      "categoria": "ROPA",
+      "subcategoria": "Remeras",
+      "colores": ["Blanco"],
+      "talles": ["M", "L", "XL"],
+      "descripcion": "Remera Boxy Fit: un corte clasico con estilo moderno. Perfecta para cualquier ocasion."
+    },
+    {
+      "id": 3,
+      "nombre": "Manga Cero Lisa 16.1",
+      "url": "https://xmenosmasprendas.com/productos/manga-cero-lisa-16-1/",
+      "precio_actual": 14190,
+      "precio_original": 16694.12,
+      "descuento_porcentaje": 15,
+      "cuotas": 6,
+      "precio_con_transferencia": 12061.50,
+      "stock_estado": "2 en stock",
+      "imagen_url": "https://acdn-us.mitiendanube.com/stores/005/707/930/products/manga-cero-lisa-16-1-24f9f89f8c67db3f997ff49fcbb62cce-1024-1024.webp",
+      "categoria": "ROPA",
+      "subcategoria": "Mangas Cero",
+      "colores": ["Multicolor"],
+      "talles": ["S", "M", "L", "XL"],
+      "descripcion": "Manga Cero Lisa 16.1: un basico reinventado para el verano. Comodidad y estilo en un solo producto."
+    },
+    {
+      "id": 4,
+      "nombre": "Remera La Dolce Vita 16.1",
+      "url": "https://xmenosmasprendas.com/productos/remera-la-dolce-vita-16-1-conq1/",
+      "precio_actual": 13090,
+      "precio_original": 15400,
+      "descuento_porcentaje": 15,
+      "cuotas": 6,
+      "precio_con_transferencia": 11126.50,
+      "stock_estado": "Ultima",
+      "imagen_url": "https://acdn-us.mitiendanube.com/stores/005/707/930/products/remera-la-dolce-vita-16-1-c347a-1024-1024.webp",
+      "categoria": "ROPA",
+      "subcategoria": "Remeras",
+      "colores": ["Blanco"],
+      "talles": ["S", "M", "L", "XL"],
+      "descripcion": "Remera La Dolce Vita 16.1: disfrutá la buena vida con esta remera de diseno clasico."
+    }
+  ],
+  "informacion_pago": {
+    "metodos_aceptados": [
+      "Mercado Pago",
+      "Tarjetas de Credito",
+      "Tarjetas de Debito",
+      "Transferencia Bancaria",
+      "Efectivo (en tiendas)"
+    ],
+    "cuotas_sin_interes": 6,
+    "descuento_transferencia": "15%",
+    "envio_gratis_desde": 200000
+  },
+  "informacion_tienda": {
+    "nombre_comercial": "X MENOS + PRENDAS",
+    "ubicacion": "Bahia Blanca, Argentina",
+    "contacto_whatsapp": "+5492914474435",
+    "contacto_email": "xmenosmasprendasbb@gmail.com",
+    "instagram": "@xmenosmasprendas",
+    "politica_devolucion_dias": 15
+  }
+},
+{
+  "tienda": {
+    "nombre": "X MENOS + PRENDAS",
+    "url": "https://xmenosmasprendas.com",
+    "ubicacion": "Bahía Blanca",
+    "contacto": {
+      "whatsapp": "542914474435",
+      "telefono": "2915128554",
+      "email": "xmenosmasprendasbb@gmail.com"
+    }
+  },
+  "fecha_extraccion": "2025-12-10",
+  "total_productos": 64,
+  "paginas_totales": 4,
+  "productos": [
+    {
+      "id": 1,
+      "nombre": "Remera SJ",
+      "categoria": "ROPA",
+      "url": "https://xmenosmasprendas.com/productos/remera-sj/",
+      "precio": "$13.640,00",
+      "precio_sin_impuestos": "$11.272,73",
+      "precio_transferencia": "$11.594,00",
+      "cuotas": "6 x $2.273,33 sin interés",
+      "descuento": "15% OFF (comprando en cantidad)",
+      "imagenes": ["https://acdn-us.mitiendanube.com/stores/005/707/930/products/remera-sj-c347a86785ffa3179917625275948690-1024-1024.webp"],
+      "descripcion": "Remera SJ: la pieza clave para cualquier outfit. Diseñada para complementar y elevar tu estilo con facilidad. Su tejido suave y cómodo garantiza una sensación agradable",
+      "stock": "¡No te lo pierdas, es el último!",
+      "colores": ["Blanco", "Negro"],
+      "talles": ["M", "L", "XL"]
+    },
+    {
+      "id": 2,
+      "nombre": "Remera Boxy Fit",
+      "categoria": "ROPA",
+      "url": "https://xmenosmasprendas.com/productos/remera-boxy-fit/",
+      "precio": "$14.630,00",
+      "precio_transferencia": "$12.435,50",
+      "cuotas": "6 x $2.438,33 sin interés",
+      "stock": "¡No te lo pierdas, es el último!"
+    },
+    {
+      "id": 3,
+      "nombre": "Manga Cero Lisa 16.1",
+      "categoria": "ROPA",
+      "url": "https://xmenosmasprendas.com/productos/manga-cero-lisa-16-1/",
+      "precio": "$14.190,00",
+      "precio_transferencia": "$12.061,50",
+      "cuotas": "6 x $2.365,00 sin interés",
+      "stock": "¡Solo quedan 2 en stock!"
+    },
+    {
+      "id": 4,
+      "nombre": "Remera Lobster dama 16.1",
+      "categoria": "ROPA",
+      "url": "https://xmenosmasprendas.com/productos/remera-lobster-dama-16-1-rv8rj/",
+      "precio": "$13.090,00",
+      "precio_transferencia": "$11.126,50",
+      "cuotas": "6 x $2.181,67 sin interés",
+      "descuento": "15% OFF (comprando en cantidad)",
+      "stock": "¡Solo quedan 2 en stock!"
+    },
+    {
+      "id": 5,
+      "nombre": "Remera La Dolce Vita 16.1",
+      "categoria": "ROPA",
+      "url": "https://xmenosmasprendas.com/productos/remera-la-dolce-vita-16-1-conq1/",
+      "precio": "$13.090,00",
+      "precio_transferencia": "$11.126,50",
+      "cuotas": "6 x $2.181,67 sin interés",
+      "descuento": "15% OFF (comprando en cantidad)",
+      "stock": "¡No te lo pierdas, es el último!"
+    },
+    {
+      "id": 6,
+      "nombre": "Remera Sea y Sun",
+      "categoria": "ROPA",
+      "url": "https://xmenosmasprendas.com/productos/remera-sea-y-sun-wq9cf/",
+      "precio": "$13.090,00",
+      "precio_transferencia": "$11.126,50",
+      "cuotas": "6 x $2.181,67 sin interés",
+      "descuento": "15% OFF (comprando en cantidad)",
+      "stock": "¡No te lo pierdas, es el último!"
+    },
+    {
+      "id": 7,
+      "nombre": "Musculosa de algodón rayada",
+      "categoria": "ROPA",
+      "url": "https://xmenosmasprendas.com/productos/musculosa-de-algodon-rayada-56rph/",
+      "precio": "$7.700,00",
+      "precio_transferencia": "$6.545,00",
+      "cuotas": "6 x $1.283,33 sin interés",
+      "descuento": "15% OFF (comprando en cantidad)",
+      "stock": "¡No te lo pierdas, es el último!"
+    },
+    {
+      "id": 8,
+      "nombre": "Remera Over Club 1994",
+      "categoria": "ROPA",
+      "url": "https://xmenosmasprendas.com/productos/remera-over-club-1994-18hzr/",
+      "precio": "$15.400,00",
+      "precio_transferencia": "$13.090,00",
+      "cuotas": "6 x $2.566,67 sin interés",
+      "descuento": "15% OFF (comprando en cantidad)",
+      "stock": "¡No te lo pierdas, es el último!"
+    },
+    {
+      "id": 9,
+      "nombre": "Remera Over",
+      "categoria": "ROPA",
+      "url": "https://xmenosmasprendas.com/productos/remera-over-tt5bp/",
+      "precio": "$15.400,00",
+      "precio_transferencia": "$13.090,00",
+      "cuotas": "6 x $2.566,67 sin interés",
+      "descuento": "15% OFF (comprando en cantidad)",
+      "stock": "¡No te lo pierdas, es el último!"
+    },
+    {
+      "id": 10,
+      "nombre": "Remera Over",
+      "categoria": "ROPA",
+      "url": "https://xmenosmasprendas.com/productos/remera-over-80asc/",
+      "precio": "$15.400,00",
+      "precio_transferencia": "$13.090,00",
+      "cuotas": "6 x $2.566,67 sin interés",
+      "descuento": "15% OFF (comprando en cantidad)",
+      "stock": "¡Solo quedan 3 en stock!"
+    },
+    {
+      "id": 11,
+      "nombre": "Remera de Algodón (Tom Y Jerry)",
+      "categoria": "ROPA",
+      "url": "https://xmenosmasprendas.com/productos/remera-de-algodon-tom-y-jerry-iu14w/",
+      "precio": "$14.200,00",
+      "precio_transferencia": "$12.070,00",
+      "cuotas": "6 x $2.366,67 sin interés",
+      "descuento": "15% OFF (comprando en cantidad)",
+      "stock": "¡No te lo pierdas, es el último!"
+    },
+    {
+      "id": 12,
+      "nombre": "Remera batik",
+      "categoria": "ROPA",
+      "url": "https://xmenosmasprendas.com/productos/remera-batik-ym2ks/",
+      "precio": "$14.200,00",
+      "precio_transferencia": "$12.070,00",
+      "cuotas": "6 x $2.366,67 sin interés",
+      "descuento": "15% OFF (comprando en cantidad)",
+      "stock": "¡No te lo pierdas, es el último!"
+    },
+    {
+      "id": 13,
+      "nombre": "Bermuda batik",
+      "categoria": "ROPA",
+      "url": "https://xmenosmasprendas.com/productos/bermuda-batik-29exx/",
+      "precio": "$15.000,00",
+      "precio_transferencia": "$12.750,00",
+      "cuotas": "6 x $2.500,00 sin interés",
+      "stock": "¡No te lo pierdas, es el último!"
+    },
+    {
+      "id": 14,
+      "nombre": "Remera Miche",
+      "categoria": "ROPA",
+      "url": "https://xmenosmasprendas.com/productos/remera-miche-kwdlw/",
+      "precio": "$16.600,00",
+      "precio_transferencia": "$14.110,00",
+      "cuotas": "6 x $2.766,67 sin interés",
+      "descuento": "15% OFF (comprando en cantidad)",
+      "stock": "¡No te lo pierdas, es el último!"
+    },
+    {
+      "id": 15,
+      "nombre": "manga cero DWMYH 16.1",
+      "categoria": "ROPA",
+      "url": "https://xmenosmasprendas.com/productos/manga-cero-dwmyh-16-1/",
+      "precio": "$14.190,00",
+      "precio_transferencia": "$12.061,50",
+      "cuotas": "6 x $2.365,00 sin interés",
+      "descuento": "15% OFF (comprando en cantidad)",
+      "stock": "¡No te lo pierdas, es el último!"
+    },
+    {
+      "id": 16,
+      "nombre": "Manga cero London Skate Jam 16.1",
+      "categoria": "ROPA",
+      "url": "https://xmenosmasprendas.com/productos/manga-cero-london-skate-jam-16-1/",
+      "precio": "$14.190,00",
+      "precio_transferencia": "$12.061,50",
+      "cuotas": "6 x $2.365,00 sin interés",
+      "descuento": "15% OFF (comprando en cantidad)",
+      "stock": "¡No te lo pierdas, es el último!"
+    },
+    {
+      "id": 17,
+      "nombre": "Manga cero Club 1994 16.1",
+      "categoria": "ROPA",
+      "url": "https://xmenosmasprendas.com/productos/manga-cero-club-1994-16-1/",
+      "precio": "$14.190,00",
+      "precio_transferencia": "$12.061,50",
+      "cuotas": "6 x $2.365,00 sin interés",
+      "descuento": "15% OFF (comprando en cantidad)",
+      "stock": "¡No te lo pierdas, es el último!"
+    },
+    {
+      "id": 18,
+      "nombre": "Cocina de Inducción",
+      "categoria": "CASA Y JARDÍN",
+      "url": "https://xmenosmasprendas.com/productos/cocina-de-induccion-importado2/",
+      "precio": "$100.000,00",
+      "precio_original": "$233.200,00",
+      "descuento_porcentaje": "57% OFF",
+      "precio_transferencia": "$85.000,00",
+      "cuotas": "6 x $16.666,67 sin interés"
+    },
+    {
+      "id": 19,
+      "nombre": "Cocina de Inducción",
+      "categoria": "CASA Y JARDÍN",
+      "url": "https://xmenosmasprendas.com/productos/cocina-de-induccion-importado3/",
+      "precio": "$60.000,00",
+      "precio_original": "$110.000,00",
+      "descuento_porcentaje": "45% OFF",
+      "precio_transferencia": "$51.000,00",
+      "cuotas": "6 x $10.000,00 sin interés",
+      "stock": "¡Solo quedan 3 en stock!"
+    },
+    {
+      "id": 20,
+      "nombre": "Remera Y.A.G.T.D",
+      "categoria": "ROPA",
+      "url": "https://xmenosmasprendas.com/productos/remera-y-a-g-t-d/",
+      "precio": "$10.780,00",
+      "precio_transferencia": "$9.163,00",
+      "cuotas": "6 x $1.796,67 sin interés",
+      "stock": "¡No te lo pierdas, es el último!"
+    },
+    {
+      "id": 21,
+      "nombre": "Remera MONTECARLO",
+      "categoria": "ROPA",
+      "url": "https://xmenosmasprendas.com/productos/remera-montecarlo/",
+      "precio": "$10.780,00",
+      "precio_transferencia": "$9.163,00",
+      "cuotas": "6 x $1.796,67 sin interés",
+      "stock": "¡No te lo pierdas, es el último!"
+    },
+    {
+      "id": 22,
+      "nombre": "Remera Grindrise",
+      "categoria": "ROPA",
+      "url": "https://xmenosmasprendas.com/productos/remera-grindrise-4qvma/",
+      "precio": "$10.780,00",
+      "precio_transferencia": "$9.163,00",
+      "cuotas": "6 x $1.796,67 sin interés",
+      "stock": "¡No te lo pierdas, es el último!"
+    },
+    {
+      "id": 23,
+      "nombre": "Remera Dynamic Movement",
+      "categoria": "ROPA",
+      "url": "https://xmenosmasprendas.com/productos/remera-dynamic-movement/",
+      "precio": "$10.780,00",
+      "precio_transferencia": "$9.163,00",
+      "cuotas": "6 x $1.796,67 sin interés",
+      "stock": "¡No te lo pierdas, es el último!"
+    },
+    {
+      "id": 24,
+      "nombre": "Remera You Will",
+      "categoria": "ROPA",
+      "url": "https://xmenosmasprendas.com/productos/remera-
+    }

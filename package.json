@@ -1,0 +1,22 @@
+{
+  "name": "tiendita-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently --names \"SERVER,CLIENT,MOTHERSHIP\" --prefix-colors \"blue,magenta,green\" \"pnpm run dev:server\" \"pnpm run dev:client\" \"pnpm run dev:mothership\"",
+    "start": "pnpm run dev",
+    "dev:server": "pnpm --filter limestore-server dev",
+    "dev:client": "pnpm --filter minimode-kids-store dev",
+    "dev:mothership": "pnpm --filter mothership dev",
+    "build:server": "pnpm --filter limestore-server build",
+    "build:client": "pnpm --filter minimode-kids-store build",
+    "build:mothership": "pnpm --filter mothership build",
+    "build:all": "pnpm build:server && pnpm build:client && pnpm build:mothership",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.58.1",
+    "concurrently": "^8.2.2"
+  }
+}

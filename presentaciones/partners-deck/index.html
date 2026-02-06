@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LimeStore Partners | Propuesta Estratégica</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="./assets.js"></script>
+    <style>
+        :root {
+            --color-bg: #09090b;
+            --color-surface: #18181b;
+            --color-primary: #84cc16; /* Lime-500 */
+            --color-primary-glow: rgba(132, 204, 22, 0.2);
+            --color-accent: #E5B800; /* Industrial Mustard */
+            --font-display: 'Outfit', sans-serif;
+            --font-body: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--color-bg);
+            color: white;
+            font-family: var(--font-body);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .font-display { font-family: var(--font-display); }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--color-bg); }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #555; }
+
+        /* Animations */
+        .fade-in-up {
+            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+
+        @keyframes fadeInUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Glassmorphism */
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Print Styles - Optimized for "Save as PDF" */
+        @media print {
+            @page {
+                size: A4;
+                margin: 0;
+            }
+
+            body {
+                background-color: #09090b !important;
+                color: white !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                /* Removed zoom to improve sharpness */
+                text-rendering: optimizeLegibility;
+            }
+
+            /* Wrapper trick for backgrounds */
+            .print-wrapper {
+                background-color: #09090b !important;
+                min-height: 100vh;
+                width: 100%;
+                position: absolute;
+                top: 0;
+                left: 0;
+                z-index: -1; /* Ensure it stays behind content */
+            }
+
+            /* Force visibility of animated elements */
+            .fade-in-up {
+                opacity: 1 !important;
+                transform: none !important;
+                animation: none !important;
+            }
+
+            /* Hide UI elements */
+            .no-print, nav, button {
+                display: none !important;
+            }
+
+            /* Layout adjustments */
+            .print-break { 
+                break-before: page; /* Start each section on a new page */
+                break-after: auto;
+                display: block; /* Remove flex centering to allow natural flow */
+                min-height: 0; /* Remove forced height */
+            }
+            
+            .print-avoid-break { 
+                break-inside: avoid; 
+            }
+
+            /* Compact spacing for print */
+            section {
+                padding-top: 3rem !important;
+                padding-bottom: 3rem !important;
+            }
+
+            /* Adjust grid gaps for print */
+            .grid {
+                gap: 2rem !important;
+            }
+
+            /* Ensure images don't take up too much space */
+            img {
+                max-height: 400px;
+                object-fit: cover;
+            }
+
+            /* Ensure backgrounds and borders render correctly */
+            .bg-surface {
+                background-color: #18181b !important;
+                border: 1px solid rgba(255, 255, 255, 0.1) !important;
+            }
+            
+            .glass {
+                background: rgba(255, 255, 255, 0.03) !important;
+            }
+
+            /* Text colors */
+            .text-gray-400 { color: #a1a1aa !important; }
+            .text-gray-500 { color: #71717a !important; }
+            .text-lime-400 { color: #a3e635 !important; }
+            
+            /* Decorative elements */
+            .decorative-gradient {
+                display: block !important;
+                opacity: 0.5 !important;
+            }
+        }
+    </style>
+</head>
+<body class="overflow-x-hidden">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 p-6 flex justify-between items-center glass no-print">
+        <div class="flex items-center gap-2">
+            <img id="logo-nav" alt="LimeStore Logo" class="h-10 w-auto">
+            <span class="text-2xl font-display font-bold tracking-tighter">Lime<span class="text-lime-400">Store</span></span>
+        </div>
+        <div class="flex flex-col items-end gap-2">
+            <button onclick="window.print()" class="flex items-center gap-2 px-5 py-2.5 bg-white text-black hover:bg-gray-200 rounded-full transition-all font-medium text-sm shadow-[0_0_20px_rgba(255,255,255,0.1)]">
+                <i data-lucide="printer" class="w-4 h-4"></i>
+                <span>Imprimir / Guardar PDF</span>
+            </button>
+            <span class="text-[10px] text-gray-400 font-medium bg-black/50 px-2 py-1 rounded backdrop-blur-sm border border-white/10">
+                ⚠️ Activa "Gráficos de fondo" al imprimir
+            </span>
+        </div>
+    </nav>
+
+    <!-- Content Wrapper -->
+    <div id="presentation-content" class="print-wrapper">
+        <!-- Content remains unchanged -->
+
+
+        <!-- Cover Slide -->
+        <section class="min-h-screen flex flex-col justify-center px-8 md:px-20 relative overflow-hidden print-break">
+            <!-- Background Pattern & Glows -->
+            <div class="absolute inset-0 opacity-[0.02] pointer-events-none decorative-gradient" style="background-image: radial-gradient(#fff 1px, transparent 1px); background-size: 60px 60px;"></div>
+            
+            <!-- Sophisticated Glows -->
+            <div class="absolute top-[-20%] right-[-10%] w-[70%] h-[70%] bg-lime-500/10 rounded-full blur-[120px] pointer-events-none decorative-gradient"></div>
+            <div class="absolute bottom-[-10%] left-[-5%] w-[40%] h-[40%] bg-emerald-500/5 rounded-full blur-[100px] pointer-events-none decorative-gradient"></div>
+            
+            <!-- Artistic Background Element (CSS Only) -->
+            <div class="absolute right-[-5%] top-1/2 -translate-y-1/2 text-[40rem] font-black text-white/[0.02] leading-none select-none pointer-events-none no-print font-display">
+                L
+            </div>
+
+            <div class="max-w-6xl relative z-10">
+                <div class="inline-flex items-center gap-3 px-4 py-2 rounded-full border border-lime-500/20 bg-lime-500/5 text-lime-400 text-[10px] font-bold tracking-[0.2em] mb-12 fade-in-up uppercase">
+                    <span class="w-1.5 h-1.5 rounded-full bg-lime-500 animate-pulse"></span>
+                    Partners Program 2026
+                </div>
+                
+                <h1 class="text-7xl md:text-[11rem] font-display font-black leading-[0.8] tracking-tighter mb-12 fade-in-up delay-100">
+                    <span class="block">EL ARTE DEL</span>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-br from-lime-400 via-lime-200 to-emerald-500">COMERCIO</span>
+                    <span class="block">DIGITAL</span>
+                </h1>
+                
+                <p class="text-xl md:text-2xl text-gray-400 max-w-2xl leading-relaxed fade-in-up delay-200 font-light tracking-wide">
+                    Democratizando el diseño de vanguardia para la <br class="hidden md:block"> nueva generación de negocios en Latinoamérica.
+                </p>
+            </div>
+
+            <!-- Bottom Branding -->
+            <div class="absolute bottom-12 left-8 md:left-20 flex items-center gap-6 fade-in-up delay-300">
+                <div class="flex items-center gap-3 text-xs text-gray-600 font-mono tracking-widest uppercase">
+                    <span>Mothership</span>
+                    <div class="w-12 h-[1px] bg-gray-800"></div>
+                    <span>2026</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Visual Showcase Slide -->
+        <section class="py-20 px-8 md:px-20 print-break">
+            <div class="mb-16">
+                <h2 class="text-4xl md:text-5xl font-display font-bold mb-4">Experiencia Visual Inmersiva</h2>
+                <p class="text-gray-400 max-w-2xl text-lg">Nuestras tiendas no son plantillas; son sistemas de diseño industrial optimizados para la conversión.</p>
+            </div>
+
+            <div class="grid gap-12">
+                <!-- Desktop Mockup -->
+                <div class="relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl bg-surface print-avoid-break">
+                    <div class="absolute top-4 left-4 flex gap-2 z-20">
+                        <div class="w-3 h-3 rounded-full bg-red-500/20"></div>
+                        <div class="w-3 h-3 rounded-full bg-yellow-500/20"></div>
+                        <div class="w-3 h-3 rounded-full bg-green-500/20"></div>
+                    </div>
+                    <img id="img-home" alt="LimeStore Desktop Demo" class="w-full h-auto object-cover opacity-90 hover:opacity-100 transition-opacity duration-700">
+                    <div class="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black/90 to-transparent">
+                        <div class="flex items-center gap-3 mb-2">
+                            <span class="px-2 py-1 bg-[#E5B800] text-black text-xs font-bold rounded uppercase tracking-wider">Industrial Theme</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white">Diseño de Alto Impacto</h3>
+                    </div>
+                </div>
+
+                <!-- Product Detail & Mobile Grid -->
+                <div class="grid md:grid-cols-2 gap-8 print-avoid-break">
+                    <div class="rounded-2xl overflow-hidden border border-white/10 bg-surface relative group">
+                        <img id="img-product" alt="Product Detail" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                        <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>
+                    </div>
+                    
+                    <div class="flex flex-col justify-center space-y-8 p-8 bg-surface rounded-2xl border border-white/5">
+                        <div class="flex gap-4 items-start">
+                            <div class="p-3 bg-lime-500/10 rounded-lg text-lime-400 shrink-0">
+                                <i data-lucide="smartphone" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold mb-2">Mobile First Nativo</h4>
+                                <p class="text-gray-400">Diseñado pensando en el 80% del tráfico que llega desde dispositivos móviles. Gestos fluidos y carga instantánea.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4 items-start">
+                            <div class="p-3 bg-lime-500/10 rounded-lg text-lime-400 shrink-0">
+                                <i data-lucide="zap" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold mb-2">Performance Extrema</h4>
+                                <p class="text-gray-400">Arquitectura moderna que garantiza tiempos de carga inferiores a 1 segundo, mejorando el SEO y la conversión.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4 items-start">
+                            <div class="p-3 bg-lime-500/10 rounded-lg text-lime-400 shrink-0">
+                                <i data-lucide="palette" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold mb-2">Personalización Total</h4>
+                                <p class="text-gray-400">Cada tienda es única. Nuestro motor de temas permite adaptar la identidad visual sin tocar una línea de código.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Philosophy & Proposal -->
+        <section class="py-20 px-8 md:px-20 bg-surface/30 print-break">
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <div>
+                    <h2 class="text-4xl md:text-5xl font-display font-bold mb-8">Nuestra Filosofía</h2>
+                    <div class="space-y-6 text-lg text-gray-300">
+                        <p class="leading-relaxed">
+                            En <strong class="text-white">LimeStore</strong>, creemos que el e-commerce no debe ser una barrera técnica, sino un lienzo para la expresión de marca.
+                        </p>
+                        <p class="leading-relaxed">
+                            Nuestra misión es empoderar a las agencias y consultores para que ofrezcan soluciones de talla mundial a sus clientes, sin los dolores de cabeza del desarrollo a medida.
+                        </p>
+                        <div class="flex gap-4 pt-4">
+                            <span class="px-4 py-2 rounded-full border border-white/10 text-sm font-medium">Estética</span>
+                            <span class="px-4 py-2 rounded-full border border-white/10 text-sm font-medium">Velocidad</span>
+                            <span class="px-4 py-2 rounded-full border border-white/10 text-sm font-medium">Simplicidad</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-gradient-to-br from-lime-900/20 to-black border border-lime-500/20 rounded-3xl p-10 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-64 h-64 bg-lime-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+                    <h3 class="text-3xl font-display font-bold mb-6">Crezcamos Juntos</h3>
+                    <p class="text-gray-400 mb-8">
+                        Buscamos socios estratégicos que compartan nuestra visión de excelencia. Agencias de marketing, estudios de diseño y consultores que quieran elevar el estándar de sus servicios.
+                    </p>
+                    <div class="flex items-center gap-3 text-lime-400 font-medium">
+                        <i data-lucide="briefcase" class="w-5 h-5"></i>
+                        <span>No buscamos vendedores, buscamos Embajadores.</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Benefits Grid -->
+        <section class="py-20 px-8 md:px-20 print-break">
+            <h2 class="text-4xl md:text-5xl font-display font-bold mb-16 text-center">Beneficios del Ecosistema</h2>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Benefit 1 -->
+                <div class="p-8 rounded-2xl bg-surface border border-white/5 hover:border-lime-500/30 transition-colors group print-avoid-break">
+                    <div class="w-12 h-12 bg-lime-500/10 rounded-xl flex items-center justify-center text-lime-400 mb-6 group-hover:scale-110 transition-transform">
+                        <i data-lucide="settings-2" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-gray-200">Configuración Asistida</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Entregamos la tienda funcionando. Tú te encargas de la estrategia, nosotros de la integración técnica inicial para tu cliente.</p>
+                </div>
+
+                <!-- Benefit 2 -->
+                <div class="p-8 rounded-2xl bg-surface border border-white/5 hover:border-lime-500/30 transition-colors group print-avoid-break">
+                    <div class="w-12 h-12 bg-lime-500/10 rounded-xl flex items-center justify-center text-lime-400 mb-6 group-hover:scale-110 transition-transform">
+                        <i data-lucide="headphones" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-gray-200">Soporte LimeStore</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">El soporte post-venta corre por nuestra cuenta. Tus clientes tendrán acceso directo a nuestro equipo técnico experto.</p>
+                </div>
+
+                <!-- Benefit 3 -->
+                <div class="p-8 rounded-2xl bg-surface border border-white/5 hover:border-lime-500/30 transition-colors group print-avoid-break">
+                    <div class="w-12 h-12 bg-lime-500/10 rounded-xl flex items-center justify-center text-lime-400 mb-6 group-hover:scale-110 transition-transform">
+                        <i data-lucide="award" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-gray-200">Certificado Oficial</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Otorgamos un certificado de Partner Oficial Autorizado, validando tu expertise y respaldo por parte de LimeStore.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing Table Section -->
+        <section class="py-20 px-8 md:px-20 print-break">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl md:text-5xl font-display font-bold mb-4">Estructura de Precios</h2>
+                    <p class="text-gray-400 text-lg">Licencias anuales con facturación única. Precios expresados en ARS.</p>
+                </div>
+
+                <div class="overflow-hidden rounded-3xl border border-white/10 bg-surface/50 backdrop-blur-sm print-avoid-break">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-white/5">
+                                <th class="p-6 text-sm font-bold uppercase tracking-wider text-gray-400">Plan / Características</th>
+                                <th class="p-6 text-sm font-bold uppercase tracking-wider text-gray-400">Precio Público (Anual)</th>
+                                <th class="p-6 text-sm font-bold uppercase tracking-wider text-lime-400">Precio Partner (30% OFF)</th>
+                                <th class="p-6 text-sm font-bold uppercase tracking-wider text-gray-400">Tu Ganancia</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-white/5">
+                            <!-- PRO PLAN -->
+                            <tr class="hover:bg-white/5 transition-colors">
+                                <td class="p-6">
+                                    <div class="font-bold text-white text-lg">PRO</div>
+                                    <ul class="mt-2 space-y-1 text-xs text-gray-500">
+                                        <li>• Hasta 50 artículos</li>
+                                        <li>• Subdominio: <span class="text-gray-400">limestore.tutienda</span></li>
+                                        <li>• Diseño esencial (sin widgets)</li>
+                                    </ul>
+                                </td>
+                                <td class="p-6">
+                                    <div class="text-gray-300 font-bold">$90.000</div>
+                                    <div class="text-[10px] text-gray-500">($7.500 / mes)</div>
+                                </td>
+                                <td class="p-6">
+                                    <div class="text-lime-400 font-bold">$63.000</div>
+                                    <div class="text-[10px] text-lime-600">($5.250 / mes)</div>
+                                </td>
+                                <td class="p-6"><span class="px-2 py-1 rounded bg-lime-500/10 text-lime-400 text-xs font-bold">+$27.000</span></td>
+                            </tr>
+                            <!-- BUSINESS PLAN -->
+                            <tr class="hover:bg-white/5 transition-colors">
+                                <td class="p-6">
+                                    <div class="font-bold text-white text-lg">BUSINESS</div>
+                                    <ul class="mt-2 space-y-1 text-xs text-gray-500">
+                                        <li>• Hasta 200 artículos</li>
+                                        <li>• Dominio propio (.com, .com.ar, etc)</li>
+                                        <li>• Diseño avanzado</li>
+                                    </ul>
+                                </td>
+                                <td class="p-6">
+                                    <div class="text-gray-300 font-bold">$180.000</div>
+                                    <div class="text-[10px] text-gray-500">($15.000 / mes)</div>
+                                </td>
+                                <td class="p-6">
+                                    <div class="text-lime-400 font-bold">$126.000</div>
+                                    <div class="text-[10px] text-lime-600">($10.500 / mes)</div>
+                                </td>
+                                <td class="p-6"><span class="px-2 py-1 rounded bg-lime-500/10 text-lime-400 text-xs font-bold">+$54.000</span></td>
+                            </tr>
+                            <!-- ENTERPRISE PLAN -->
+                            <tr class="bg-lime-500/5 hover:bg-lime-500/10 transition-colors">
+                                <td class="p-6">
+                                    <div class="font-bold text-white text-lg flex items-center gap-2">
+                                        ENTERPRISE 
+                                        <span class="px-2 py-0.5 rounded-full bg-lime-500 text-black text-[10px] font-black uppercase">Full Power</span>
+                                    </div>
+                                    <ul class="mt-2 space-y-1 text-xs text-gray-500">
+                                        <li>• Artículos ilimitados</li>
+                                        <li>• Dominio propio + SSL</li>
+                                        <li>• <span class="text-lime-400 font-medium">Widgets exclusivos de producto</span></li>
+                                        <li>• Personalización total de UI</li>
+                                    </ul>
+                                </td>
+                                <td class="p-6">
+                                    <div class="text-gray-300 font-bold">$310.000</div>
+                                    <div class="text-[10px] text-gray-500">($25.833 / mes)</div>
+                                </td>
+                                <td class="p-6">
+                                    <div class="text-lime-400 font-bold">$217.000</div>
+                                    <div class="text-[10px] text-lime-600">($18.083 / mes)</div>
+                                </td>
+                                <td class="p-6"><span class="px-2 py-1 rounded bg-lime-500/10 text-lime-400 text-xs font-bold">+$93.000</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="mt-6 text-center text-gray-500 text-sm italic">
+                    * Los precios partner aplican a partir de la tercera licencia adquirida (las primeras 2 están incluidas en tu membresía).
+                </p>
+            </div>
+        </section>
+
+        <!-- Investment & Requirements -->
+        <section class="py-20 px-8 md:px-20 bg-surface/30 print-break">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl md:text-5xl font-display font-bold mb-4">Propuesta de Lanzamiento</h2>
+                    <p class="text-gray-400 text-lg">Válido hasta el <span class="text-white font-bold">9 de Febrero de 2026</span> (Lanzamiento Oficial).</p>
+                </div>
+
+                <div class="relative bg-gradient-to-b from-surface to-black border border-white/10 rounded-3xl p-1 overflow-hidden">
+                    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-1 bg-gradient-to-r from-transparent via-lime-500 to-transparent opacity-50"></div>
+                    
+                    <div class="bg-[#09090b] rounded-[22px] p-8 md:p-12 relative overflow-hidden">
+                        <div class="grid md:grid-cols-2 gap-12 items-center relative z-10">
+                            <div>
+                                <div class="inline-block px-3 py-1 rounded-full bg-lime-500/10 text-lime-400 text-xs font-bold tracking-wider mb-6">
+                                    INVERSIÓN INICIAL PARTNER
+                                </div>
+                                <div class="flex items-baseline gap-2 mb-2">
+                                    <span class="text-5xl md:text-6xl font-display font-bold text-white">$300.000</span>
+                                    <span class="text-xl text-gray-500 font-medium">ARS</span>
+                                </div>
+                                <p class="text-gray-400 mb-8">Acceso total al programa de partners.</p>
+                                
+                                <div class="space-y-4">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-6 h-6 rounded-full bg-lime-500/20 flex items-center justify-center text-lime-400 shrink-0">
+                                            <i data-lucide="check" class="w-3 h-3"></i>
+                                        </div>
+                                        <span class="text-gray-200">30% OFF en todas las licencias futuras</span>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-6 h-6 rounded-full bg-lime-500/20 flex items-center justify-center text-lime-400 shrink-0">
+                                            <i data-lucide="check" class="w-3 h-3"></i>
+                                        </div>
+                                        <span class="text-gray-200">Panel de Partner exclusivo</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="space-y-6">
+                                <div class="p-6 rounded-xl bg-white/5 border border-white/5 hover:border-lime-500/30 transition-colors">
+                                    <div class="flex items-start gap-4">
+                                        <div class="p-2 bg-lime-500/10 rounded-lg text-lime-400">
+                                            <i data-lucide="package" class="w-5 h-5"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="text-lg font-bold text-white mb-1">2 Licencias Enterprise</h4>
+                                            <p class="text-sm text-gray-400">Incluidas para reventa. Recuperas el 100% de tu inversión con tus primeros clientes.</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="p-6 rounded-xl bg-white/5 border border-white/5 hover:border-lime-500/30 transition-colors">
+                                    <div class="flex items-start gap-4">
+                                        <div class="p-2 bg-lime-500/10 rounded-lg text-lime-400">
+                                            <i data-lucide="layout" class="w-5 h-5"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="text-lg font-bold text-white mb-1">Tienda Demo & Certificación</h4>
+                                            <p class="text-sm text-gray-400">Tienda modelo para exhibición y certificado oficial de partner autorizado.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer / Contact -->
+        <section class="py-20 px-8 md:px-20 border-t border-white/10 text-center print-avoid-break">
+            <h2 class="text-4xl md:text-6xl font-display font-bold mb-8">Únete a la Revolución</h2>
+            <p class="text-xl text-gray-400 mb-12">El comercio electrónico está evolucionando. No te quedes atrás.</p>
+            
+            <div class="inline-flex flex-col items-center gap-4 p-8 bg-surface rounded-2xl border border-white/5">
+                <div class="text-lg font-medium text-white">Contáctanos hoy para activar tu cuenta de Partner</div>
+                <a href="mailto:partners@limestore.com" class="flex items-center gap-2 text-lime-400 hover:text-lime-300 transition-colors text-2xl font-bold no-underline">
+                    partners@limestore.com <i data-lucide="arrow-right" class="w-6 h-6"></i>
+                </a>
+                <div class="text-gray-500">www.limestore.com</div>
+            </div>
+            
+            <div class="mt-20 text-gray-600 text-sm">
+                &copy; 2026 LimeStore Inc. Todos los derechos reservados.
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        // Initialize Assets from assets.js
+        window.addEventListener('DOMContentLoaded', () => {
+            if (window.LIME_ASSETS) {
+                document.getElementById('logo-nav').src = window.LIME_ASSETS.limeLogo_png;
+                document.getElementById('img-home').src = window.LIME_ASSETS.store_home_png;
+                document.getElementById('img-product').src = window.LIME_ASSETS.store_product_png;
+            }
+            lucide.createIcons();
+        });
+    </script>
+</body>
+</html>

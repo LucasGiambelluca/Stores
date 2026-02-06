@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análisis Competitivo: Wigy | Competitive Spy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Progress Bar -->
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-brand">🕵️ Competitive Spy</div>
+        <div class="nav-controls">
+            <span class="slide-counter"><span id="currentSlide">1</span> / <span id="totalSlides">8</span></span>
+            <button class="nav-btn" id="prevBtn">←</button>
+            <button class="nav-btn" id="nextBtn">→</button>
+        </div>
+    </nav>
+
+    <!-- Slides Container -->
+    <main class="slides-container">
+        
+        <!-- Slide 1: Cover -->
+        <section class="slide active" data-slide="1">
+            <div class="slide-content cover">
+                <div class="badge">🎯 Análisis Competitivo</div>
+                <h1 class="glowing-text">Wigy</h1>
+                <p class="subtitle">Widgets y Bundles para Tienda Nube</p>
+                <div class="cover-stats">
+                    <div class="stat-card">
+                        <span class="stat-value">18</span>
+                        <span class="stat-label">Widgets</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-value">$54k</span>
+                        <span class="stat-label">ARS/mes</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-value">4</span>
+                        <span class="stat-label">Mejoras P0</span>
+                    </div>
+                </div>
+                <div class="scroll-hint">
+                    <span>Usa las flechas o swipe para navegar</span>
+                    <div class="arrow-down">↓</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 2: ¿Qué es Wigy? -->
+        <section class="slide" data-slide="2">
+            <div class="slide-content">
+                <h2>¿Qué es Wigy?</h2>
+                <div class="two-columns">
+                    <div class="column">
+                        <div class="info-card">
+                            <div class="info-icon">📦</div>
+                            <h3>Producto</h3>
+                            <p>App de widgets interactivos para tiendas de Tienda Nube. Permite crear bundles, promociones y elementos visuales sin código.</p>
+                        </div>
+                        <div class="info-card">
+                            <div class="info-icon">💰</div>
+                            <h3>Precio</h3>
+                            <p><strong>ARS $54,000/mes</strong> (~USD $45)<br>Sin comisiones • Widgets ilimitados</p>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <div class="info-card">
+                            <div class="info-icon">🌎</div>
+                            <h3>Mercados</h3>
+                            <div class="tags">
+                                <span class="tag">🇦🇷 Argentina</span>
+                                <span class="tag">🇲🇽 México</span>
+                                <span class="tag">🇨🇴 Colombia</span>
+                                <span class="tag">🇨🇱 Chile</span>
+                                <span class="tag">🇧🇷 Brasil</span>
+                            </div>
+                        </div>
+                        <div class="info-card">
+                            <div class="info-icon">⭐</div>
+                            <h3>Calificación</h3>
+                            <p class="rating">⭐⭐⭐⭐⭐ 5/5</p>
+                            <p class="rating-note">1 review en Tienda Nube</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 3: Catálogo de Widgets -->
+        <section class="slide" data-slide="3">
+            <div class="slide-content">
+                <h2>Catálogo de Widgets <span class="count-badge">18</span></h2>
+                <div class="widget-grid">
+                    <div class="widget-category">
+                        <h4>🛒 Conversión</h4>
+                        <ul>
+                            <li>Productos complementarios</li>
+                            <li>Bundle de cantidad</li>
+                            <li>Bundle 2x1, 3x2</li>
+                            <li>Pack complementarios</li>
+                            <li>Barra de acción sticky</li>
+                        </ul>
+                    </div>
+                    <div class="widget-category">
+                        <h4>🏆 Social Proof</h4>
+                        <ul>
+                            <li>Mensaje de garantía</li>
+                            <li>Caja de opiniones</li>
+                            <li>Lista de beneficios</li>
+                        </ul>
+                    </div>
+                    <div class="widget-category">
+                        <h4>⏰ Urgencia</h4>
+                        <ul>
+                            <li>Cuenta regresiva</li>
+                            <li>Mensaje de alerta</li>
+                        </ul>
+                    </div>
+                    <div class="widget-category">
+                        <h4>ℹ️ Información</h4>
+                        <ul>
+                            <li>Tabla de talles</li>
+                            <li>Preguntas frecuentes</li>
+                            <li>Antes y después</li>
+                        </ul>
+                    </div>
+                    <div class="widget-category">
+                        <h4>🎨 Visual</h4>
+                        <ul>
+                            <li>Slider de videos</li>
+                            <li>Banner deslizante</li>
+                            <li>Badge envío gratis</li>
+                            <li>Badge cuotas</li>
+                            <li>Badge cupón</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 4: Gaps Detectados -->
+        <section class="slide" data-slide="4">
+            <div class="slide-content">
+                <h2>🔍 Gaps Detectados</h2>
+                <p class="slide-subtitle">Oportunidades de mejora identificadas</p>
+                
+                <div class="gaps-grid">
+                    <div class="gap-card critical">
+                        <div class="gap-severity">🔴 Crítico</div>
+                        <h3>Sin Analytics</h3>
+                        <p>No hay forma de medir el impacto de los widgets. ¿ROI? Desconocido.</p>
+                    </div>
+                    <div class="gap-card critical">
+                        <div class="gap-severity">🔴 Crítico</div>
+                        <h3>Sin Triggers Inteligentes</h3>
+                        <p>Widgets estáticos. No hay exit intent, scroll triggers ni timing.</p>
+                    </div>
+                    <div class="gap-card medium">
+                        <div class="gap-severity">🟡 Medio</div>
+                        <h3>Bundles Manuales</h3>
+                        <p>Configuración 100% manual. Sin sugerencias basadas en datos.</p>
+                    </div>
+                    <div class="gap-card medium">
+                        <div class="gap-severity">🟡 Medio</div>
+                        <h3>Sin A/B Testing</h3>
+                        <p>No hay forma de comparar variantes de widgets.</p>
+                    </div>
+                    <div class="gap-card low">
+                        <div class="gap-severity">🟢 Bajo</div>
+                        <h3>Solo Tienda Nube</h3>
+                        <p>No funciona en Shopify, WooCommerce u otras plataformas.</p>
+                    </div>
+                    <div class="gap-card low">
+                        <div class="gap-severity">🟢 Bajo</div>
+                        <h3>Sin Personalización por Segmento</h3>
+                        <p>Mismo widget para todos los usuarios.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 5: Brainstorming 5 Dimensiones -->
+        <section class="slide" data-slide="5">
+            <div class="slide-content">
+                <h2>💡 Brainstorming: 5 Dimensiones</h2>
+                <p class="slide-subtitle">Metodología de Superación 20%+</p>
+                
+                <div class="dimensions-container">
+                    <div class="dimension-card" data-dimension="speed">
+                        <div class="dimension-icon">⚡</div>
+                        <h3>Más Rápido</h3>
+                        <p>One-click templates por industria</p>
+                        <div class="dimension-score">ROI: 16</div>
+                    </div>
+                    <div class="dimension-card" data-dimension="simple">
+                        <div class="dimension-icon">🎯</div>
+                        <h3>Más Simple</h3>
+                        <p>Wizard guiado con auto-detección</p>
+                        <div class="dimension-score">ROI: 16</div>
+                    </div>
+                    <div class="dimension-card" data-dimension="smart">
+                        <div class="dimension-icon">🤖</div>
+                        <h3>Más Inteligente</h3>
+                        <p>AI Bundles + Analytics Dashboard</p>
+                        <div class="dimension-score">ROI: 15</div>
+                    </div>
+                    <div class="dimension-card" data-dimension="resilient">
+                        <div class="dimension-icon">🛡️</div>
+                        <h3>Más Resiliente</h3>
+                        <p>Fallback elegante + Lazy loading</p>
+                        <div class="dimension-score">ROI: 16</div>
+                    </div>
+                    <div class="dimension-card" data-dimension="delightful">
+                        <div class="dimension-icon">✨</div>
+                        <h3>Más Deleitante</h3>
+                        <p>Animaciones premium + Confetti</p>
+                        <div class="dimension-score">ROI: 16</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 6: Propuestas Priorizadas -->
+        <section class="slide" data-slide="6">
+            <div class="slide-content">
+                <h2>🎯 Propuestas Priorizadas</h2>
+                <p class="slide-subtitle">Top mejoras por ROI Score</p>
+                
+                <div class="proposals-timeline">
+                    <div class="proposal p0">
+                        <div class="proposal-badge">P0</div>
+                        <div class="proposal-content">
+                            <h3>📊 Analytics Dashboard</h3>
+                            <p>Métricas de clics, conversiones y revenue atribuido por widget</p>
+                            <div class="proposal-meta">
+                                <span class="impact">Impacto: 5/5</span>
+                                <span class="effort">Esfuerzo: 3/5</span>
+                                <span class="roi">ROI: 15</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="proposal p0">
+                        <div class="proposal-badge">P0</div>
+                        <div class="proposal-content">
+                            <h3>🎯 Behavioral Triggers</h3>
+                            <p>Exit intent, scroll depth, tiempo en página para activar widgets</p>
+                            <div class="proposal-meta">
+                                <span class="impact">Impacto: 5/5</span>
+                                <span class="effort">Esfuerzo: 3/5</span>
+                                <span class="roi">ROI: 15</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="proposal p0">
+                        <div class="proposal-badge">P0</div>
+                        <div class="proposal-content">
+                            <h3>🤖 AI Product Bundles</h3>
+                            <p>Sugerencias automáticas basadas en co-purchases históricos</p>
+                            <div class="proposal-meta">
+                                <span class="impact">Impacto: 5/5</span>
+                                <span class="effort">Esfuerzo: 4/5</span>
+                                <span class="roi">ROI: 10</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="proposal p1">
+                        <div class="proposal-badge">P1</div>
+                        <div class="proposal-content">
+                            <h3>✨ Animaciones Premium</h3>
+                            <p>Micro-interacciones con Framer Motion y confetti en conversiones</p>
+                            <div class="proposal-meta">
+                                <span class="impact">Impacto: 4/5</span>
+                                <span class="effort">Esfuerzo: 2/5</span>
+                                <span class="roi">ROI: 16</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 7: Recetas Técnicas -->
+        <section class="slide" data-slide="7">
+            <div class="slide-content">
+                <h2>🔧 Recetas Técnicas</h2>
+                <p class="slide-subtitle">Implementación paso a paso</p>
+                
+                <div class="recipes-tabs">
+                    <button class="recipe-tab active" data-recipe="analytics">📊 Analytics</button>
+                    <button class="recipe-tab" data-recipe="triggers">🎯 Triggers</button>
+                    <button class="recipe-tab" data-recipe="ai">🤖 AI Bundles</button>
+                    <button class="recipe-tab" data-recipe="animations">✨ Animaciones</button>
+                </div>
+                
+                <div class="recipe-content active" id="recipe-analytics">
+                    <div class="recipe-card">
+                        <h4>Backend</h4>
+                        <code>POST /api/analytics/events { widgetId, eventType, productId }</code>
+                        <code>GET /api/analytics/dashboard { period: '7d' | '30d' }</code>
+                    </div>
+                    <div class="recipe-card">
+                        <h4>Frontend</h4>
+                        <code>onClick → trackEvent('click', widgetId)</code>
+                        <code>onAddToCart → trackEvent('conversion', widgetId, amount)</code>
+                    </div>
+                    <div class="recipe-card">
+                        <h4>Dashboard UI</h4>
+                        <p>Charts con Recharts: líneas de conversión, barras de widgets más efectivos</p>
+                    </div>
+                    <div class="recipe-estimate">⏱️ Estimación: 3-5 días</div>
+                </div>
+                
+                <div class="recipe-content" id="recipe-triggers">
+                    <div class="recipe-card">
+                        <h4>Exit Intent</h4>
+                        <code>document.addEventListener('mouseout', (e) => { if (e.clientY <= 0) showWidget() })</code>
+                    </div>
+                    <div class="recipe-card">
+                        <h4>Scroll Trigger</h4>
+                        <code>IntersectionObserver con threshold: 0.5</code>
+                    </div>
+                    <div class="recipe-card">
+                        <h4>Time Trigger</h4>
+                        <code>setTimeout(() => showWidget(), 30000)</code>
+                    </div>
+                    <div class="recipe-estimate">⏱️ Estimación: 2-3 días</div>
+                </div>
+                
+                <div class="recipe-content" id="recipe-ai">
+                    <div class="recipe-card">
+                        <h4>SQL Query</h4>
+                        <code>SELECT p1.id, p2.id, COUNT(*) FROM order_items p1 JOIN order_items p2...</code>
+                    </div>
+                    <div class="recipe-card">
+                        <h4>Recommendation Engine</h4>
+                        <code>getCoPurchases(productId).slice(0, 3)</code>
+                    </div>
+                    <div class="recipe-card">
+                        <h4>Admin UI</h4>
+                        <p>Lista de sugerencias con score de confianza + One-click "Crear Bundle"</p>
+                    </div>
+                    <div class="recipe-estimate">⏱️ Estimación: 5-7 días</div>
+                </div>
+                
+                <div class="recipe-content" id="recipe-animations">
+                    <div class="recipe-card">
+                        <h4>Framer Motion</h4>
+                        <code>variants: { hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }</code>
+                    </div>
+                    <div class="recipe-card">
+                        <h4>Confetti</h4>
+                        <code>confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } })</code>
+                    </div>
+                    <div class="recipe-estimate">⏱️ Estimación: 2-3 días</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 8: Next Steps -->
+        <section class="slide" data-slide="8">
+            <div class="slide-content conclusion">
+                <h2>🚀 Próximos Pasos</h2>
+                
+                <div class="next-steps">
+                    <div class="step-item">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3>Analytics Dashboard</h3>
+                            <p>Demostrar ROI con datos reales de impacto</p>
+                            <span class="step-skill">Backend-SR + Frontend-SR</span>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3>Behavioral Triggers</h3>
+                            <p>Diferenciador inmediato vs competencia</p>
+                            <span class="step-skill">Frontend-SR</span>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3>AI Bundles</h3>
+                            <p>Reducir fricción de configuración</p>
+                            <span class="step-skill">Backend-SR + Frontend-SR</span>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h3>Animaciones Premium</h3>
+                            <p>Deleite visual que supera a Wigy</p>
+                            <span class="step-skill">Visual-UX-Artist</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="conclusion-cta">
+                    <p>¿Listo para superar a la competencia?</p>
+                    <button class="cta-button" onclick="alert('¡Vamos a implementar!')">Comenzar Implementación 🚀</button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Keyboard hints -->
+    <div class="keyboard-hints">
+        <span>← → Navegar</span>
+        <span>ESC Inicio</span>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

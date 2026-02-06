@@ -1,0 +1,21 @@
+{
+  "name": "LimeStoreNew",
+  "short_name": "LimeStore",
+  "description": "Tu tienda online - Powered by LimeStore",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#66FF00",
+  "icons": [
+    {
+      "src": "/limestore-logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/limestore-logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

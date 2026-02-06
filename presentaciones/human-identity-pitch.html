@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tiendita: El Paseo Digital</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;400;500;700&family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"DM Sans"', 'sans-serif'],
+                        display: ['Outfit', 'sans-serif'],
+                    },
+                    colors: {
+                        latam: {
+                            sand: '#FDFCF8',
+                            clay: '#E6D5B8',
+                            sunset: '#FF9F68',
+                            deep: '#1B3B5A',
+                            leaf: '#6B9080',
+                        }
+                    },
+                    boxShadow: {
+                        'soft': '0 20px 40px -15px rgba(27, 59, 90, 0.1)',
+                        'inner-glow': 'inset 0 0 20px rgba(255, 159, 104, 0.1)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #FDFCF8; color: #1B3B5A; overflow-x: hidden; }
+        .slide { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; position: relative; padding: 2rem; }
+        .organic-shape { position: absolute; border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; filter: blur(60px); opacity: 0.6; z-index: 0; animation: morph 10s ease-in-out infinite alternate; }
+        .card { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.5); border-radius: 24px; box-shadow: 0 20px 40px -15px rgba(27, 59, 90, 0.1); z-index: 10; }
+        @keyframes morph { 0% { border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; } 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; } }
+        .pulse-dot { width: 12px; height: 12px; background-color: #FF9F68; border-radius: 50%; position: absolute; box-shadow: 0 0 0 0 rgba(255, 159, 104, 0.7); animation: pulse-ring 2s infinite; }
+        @keyframes pulse-ring { 0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 159, 104, 0.7); } 70% { transform: scale(1); box-shadow: 0 0 0 20px rgba(255, 159, 104, 0); } 100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 159, 104, 0); } }
+    </style>
+</head>
+<body>
+
+    <!-- Slide 1: The Feeling -->
+    <section class="slide items-center text-center relative overflow-hidden" id="intro">
+        <div class="organic-shape bg-latam-sunset w-96 h-96 top-0 left-0"></div>
+        <div class="organic-shape bg-latam-leaf w-96 h-96 bottom-0 right-0" style="animation-delay: -5s;"></div>
+        
+        <div class="relative z-10 max-w-4xl">
+            <h1 class="text-5xl md:text-7xl font-display font-bold mb-8 leading-tight text-latam-deep">
+                El Ecommerce<br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-latam-sunset to-pink-500">se siente solo.</span>
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-600 mb-12 font-light">
+                Recuperemos la calidez del "Paseo" de domingo.<br>
+                Donde comprar no es una transacción, es una <strong>conexión</strong>.
+            </p>
+            <div class="flex justify-center gap-4">
+                <div class="px-6 py-3 rounded-full bg-white shadow-soft text-sm font-bold text-latam-deep flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-green-400"></span> Confianza
+                </div>
+                <div class="px-6 py-3 rounded-full bg-white shadow-soft text-sm font-bold text-latam-deep flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-latam-sunset"></span> Comunidad
+                </div>
+                <div class="px-6 py-3 rounded-full bg-white shadow-soft text-sm font-bold text-latam-deep flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-blue-400"></span> Seguridad
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 2: The Problem vs Solution -->
+    <section class="slide bg-white/50">
+        <div class="grid md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto w-full z-10">
+            <!-- The Problem -->
+            <div class="space-y-8 opacity-50 hover:opacity-100 transition-opacity duration-500">
+                <h2 class="text-3xl font-display font-bold text-gray-400">El Modelo Actual</h2>
+                <div class="p-6 border-l-4 border-gray-300 pl-6">
+                    <h3 class="text-xl font-bold mb-2">Frialdad Algorítmica</h3>
+                    <p class="text-gray-500">"Los clientes que compraron esto..." (Nadie te conoce).</p>
+                </div>
+                <div class="p-6 border-l-4 border-gray-300 pl-6">
+                    <h3 class="text-xl font-bold mb-2">Soledad del Emprendedor</h3>
+                    <p class="text-gray-500">Un dashboard lleno de ceros y nadie con quien hablar.</p>
+                </div>
+                <div class="p-6 border-l-4 border-gray-300 pl-6">
+                    <h3 class="text-xl font-bold mb-2">Desconfianza Latente</h3>
+                    <p class="text-gray-500">"¿Me llegará el producto? ¿A quién reclamo?"</p>
+                </div>
+            </div>
+
+            <!-- The Solution -->
+            <div class="card p-8 md:p-12 transform scale-105 border-latam-sunset/30">
+                <h2 class="text-3xl font-display font-bold text-latam-deep mb-8">El Paseo Digital</h2>
+                <div class="space-y-8">
+                    <div class="flex gap-4 items-start">
+                        <div class="w-12 h-12 rounded-2xl bg-latam-sunset/20 flex items-center justify-center text-2xl">🤝</div>
+                        <div>
+                            <h3 class="text-xl font-bold text-latam-deep">Calidez Humana</h3>
+                            <p class="text-gray-600">Micro-copy que te habla como un socio, no como un robot.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4 items-start">
+                        <div class="w-12 h-12 rounded-2xl bg-latam-leaf/20 flex items-center justify-center text-2xl">🌿</div>
+                        <div>
+                            <h3 class="text-xl font-bold text-latam-deep">Comunidad Visible</h3>
+                            <p class="text-gray-600">Ver que otros están construyendo sus sueños al mismo tiempo.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4 items-start">
+                        <div class="w-12 h-12 rounded-2xl bg-blue-100 flex items-center justify-center text-2xl">🛡️</div>
+                        <div>
+                            <h3 class="text-xl font-bold text-latam-deep">Refugio Seguro</h3>
+                            <p class="text-gray-600">Un espacio donde equivocarse está bien y la ayuda es real.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 3: The Market Reality -->
+    <section class="slide relative">
+        <div class="organic-shape bg-blue-100 w-[800px] h-[800px] -right-64 top-20"></div>
+        
+        <div class="relative z-10 max-w-6xl mx-auto w-full text-center">
+            <h2 class="text-4xl font-display font-bold mb-16 text-latam-deep">¿Por qué en Latinoamérica?</h2>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="card p-8 text-left">
+                    <div class="text-5xl font-display font-bold text-latam-sunset mb-4">97%</div>
+                    <p class="text-lg font-bold mb-2">Desconfianza Inicial</p>
+                    <p class="text-sm text-gray-600">De los consumidores temen comprar en sitios desconocidos. La "calidez" es el antídoto al miedo.</p>
+                </div>
+                <div class="card p-8 text-left">
+                    <div class="text-5xl font-display font-bold text-latam-leaf mb-4">Social</div>
+                    <p class="text-lg font-bold mb-2">El Factor "Paseo"</p>
+                    <p class="text-sm text-gray-600">En los 90s, el mall era el "tercer lugar". Hoy, no existe ese espacio digital seguro.</p>
+                </div>
+                <div class="card p-8 text-left">
+                    <div class="text-5xl font-display font-bold text-blue-500 mb-4">4x</div>
+                    <p class="text-lg font-bold mb-2">Valor de Vida (LTV)</p>
+                    <p class="text-sm text-gray-600">De clientes que se sienten "cuidados" vs solo "satisfechos".</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 4: Interactive Pulse -->
+    <section class="slide bg-latam-deep text-white text-center relative overflow-hidden">
+        <div id="pulse-container" class="absolute inset-0"></div>
+        
+        <div class="relative z-10 max-w-2xl mx-auto pointer-events-none">
+            <h2 class="text-4xl font-display font-bold mb-6">El Pulso del Gremio</h2>
+            <p class="text-xl font-light opacity-90 mb-8">
+                Así se siente trabajar en Tiendita. No estás solo en tu habitación.<br>
+                Estás conectado con miles de soñadores.
+            </p>
+        </div>
+        
+        <div class="absolute bottom-10 left-0 right-0 text-center z-20">
+            <button onclick="addPulse()" class="bg-latam-sunset text-white px-8 py-4 rounded-full font-bold text-lg hover:scale-105 transition-transform shadow-lg shadow-orange-500/30">
+                Enviar Ánimo
+            </button>
+        </div>
+    </section>
+
+    <script>
+        // GSAP Animations
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Intro
+        gsap.from("#intro h1", { y: 50, opacity: 0, duration: 1.5, ease: "power3.out" });
+        gsap.from("#intro p", { y: 30, opacity: 0, duration: 1.5, delay: 0.3, ease: "power3.out" });
+
+        // Pulse Demo
+        const container = document.getElementById('pulse-container');
+        
+        function createPulse(x, y) {
+            const pulse = document.createElement('div');
+            pulse.className = 'pulse-dot';
+            pulse.style.left = x + 'px';
+            pulse.style.top = y + 'px';
+            container.appendChild(pulse);
+            
+            // Connect lines to nearby pulses (simulated)
+            const line = document.createElement('div');
+            line.style.position = 'absolute';
+            line.style.left = x + 'px';
+            line.style.top = y + 'px';
+            line.style.width = '100px';
+            line.style.height = '1px';
+            line.style.background = 'linear-gradient(90deg, rgba(255,159,104,0.5), transparent)';
+            line.style.transformOrigin = 'left center';
+            line.style.transform = `rotate(${Math.random() * 360}deg)`;
+            container.appendChild(line);
+
+            gsap.to([pulse, line], { opacity: 0, duration: 3, onComplete: () => { pulse.remove(); line.remove(); } });
+        }
+
+        function addPulse() {
+            const w = window.innerWidth;
+            const h = window.innerHeight;
+            for(let i=0; i<5; i++) {
+                setTimeout(() => {
+                    createPulse(Math.random() * w, Math.random() * h);
+                }, i * 100);
+            }
+        }
+
+        // Auto pulses
+        setInterval(() => {
+            createPulse(Math.random() * window.innerWidth, Math.random() * window.innerHeight);
+        }, 800);
+
+    </script>
+</body>
+</html>

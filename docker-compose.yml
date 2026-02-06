@@ -1,0 +1,85 @@
+version: '3.8'
+
+services:
+  # ==========================================
+  # DATABASE (PostgreSQL)
+  # ==========================================
+  db:
+    image: postgres:15-alpine
+    container_name: tiendita-db
+    restart: always
+    environment:
+      POSTGRES_USER: tiendita
+      POSTGRES_PASSWORD: password123
+      POSTGRES_DB: tiendita
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U tiendita"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ==========================================
+  # SERVER (Backend API)
+  # ==========================================
+  server:
+    build: 
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: tiendita-server
+    restart: always
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      PORT: 3001
+      NODE_ENV: production
+      DATABASE_URL: postgresql://tiendita:password123@db:5432/tiendita
+      # Generate secure secrets in production!
+      JWT_SECRET: dev_secret_change_me_in_prod_123456789
+      ENCRYPTION_KEY: 0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef
+      # Dashboard Admin
+      ADMIN_EMAIL: admin@tiendita.app
+      ADMIN_PASSWORD: AdminPassword123!
+      # Store Defaults
+      STORE_URL: http://localhost
+      STORE_NAME: Tienda Demo
+      MP_ACCESS_TOKEN: TEST-TOKEN
+      MP_PUBLIC_KEY: TEST-KEY
+    volumes:
+      - ./server/uploads:/app/uploads
+    expose:
+      - "3001"
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3001/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - tiendita-network
+
+  # ==========================================
+  # CLIENT (Frontend + Nginx)
+  # ==========================================
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    container_name: tiendita-client
+    restart: always
+    depends_on:
+      - server
+    ports:
+      - "80:80"
+    networks:
+      - tiendita-network
+
+networks:
+  tiendita-network:
+    driver: bridge
+
+volumes:
+  postgres_data:

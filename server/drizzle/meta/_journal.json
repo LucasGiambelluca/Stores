@@ -1,0 +1,27 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1770127355060,
+      "tag": "0000_gorgeous_the_order",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1770131732162,
+      "tag": "0001_panoramic_baron_zemo",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1770332373026,
+      "tag": "0002_add_saas_sales_table",
+      "breakpoints": true
+    }
+  ]
+}

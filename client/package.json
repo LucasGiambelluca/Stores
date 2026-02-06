@@ -1,0 +1,43 @@
+{
+  "name": "minimode-kids-store",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "dev:frontend": "vite",
+    "dev:server": "cd server && pnpm run dev",
+    "build": "vite build",
+    "preview": "vite preview",
+    "start": "pnpm run dev"
+  },
+  "dependencies": {
+    "@gradio/client": "^2.0.0",
+    "axios": "^1.13.2",
+    "buffer": "^6.0.3",
+    "chart.js": "^4.5.1",
+    "date-fns": "^4.1.0",
+    "framer-motion": "^12.24.0",
+    "jspdf": "^3.0.4",
+    "jspdf-autotable": "^5.0.2",
+    "lucide-react": "^0.555.0",
+    "react": "^18.3.1",
+    "react-chartjs-2": "^5.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^7.9.6",
+    "xlsx": "^0.18.5"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.18",
+    "@types/node": "^22.14.0",
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^5.0.0",
+    "autoprefixer": "^10.4.23",
+    "concurrently": "^9.2.1",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.1.18",
+    "typescript": "~5.8.2",
+    "vite": "^6.2.0"
+  }
+}

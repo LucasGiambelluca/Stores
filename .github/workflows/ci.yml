@@ -1,0 +1,201 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+env:
+  NODE_VERSION: '20'
+
+jobs:
+  # ==========================================
+  # LINT & TYPE CHECK
+  # ==========================================
+  lint:
+    name: 🔍 Lint & Type Check
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          cache-dependency-path: '**/package-lock.json'
+      
+      - name: Install pnpm
+        run: npm install -g pnpm
+      
+      - name: Install dependencies (server)
+        run: |
+          cd server
+          pnpm install --frozen-lockfile
+      
+      - name: TypeScript check (server)
+        run: |
+          cd server
+          npx tsc --noEmit
+      
+      - name: Install dependencies (mothership)
+        run: |
+          cd mothership
+          pnpm install --frozen-lockfile
+      
+      - name: Lint (mothership)
+        run: |
+          cd mothership
+          pnpm run lint
+
+  # ==========================================
+  # TEST
+  # ==========================================
+  test:
+    name: 🧪 Run Tests
+    runs-on: ubuntu-latest
+    needs: lint
+    
+    env:
+      NODE_ENV: test
+      JWT_SECRET: ci-test-secret-key-32chars
+      ADMIN_PASSWORD: TestPass123!
+      MP_ACCESS_TOKEN: TEST-mock-token
+      MP_PUBLIC_KEY: TEST-mock-key
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          cache-dependency-path: '**/package-lock.json'
+      
+      - name: Install pnpm
+        run: npm install -g pnpm
+      
+      - name: Install dependencies
+        run: |
+          cd server
+          pnpm install --frozen-lockfile
+      
+      - name: Run tests with coverage
+        run: |
+          cd server
+          pnpm run test:coverage
+      
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: server/coverage/
+          retention-days: 7
+
+  # ==========================================
+  # BUILD
+  # ==========================================
+  build:
+    name: 🏗️ Build
+    runs-on: ubuntu-latest
+    needs: test
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          cache-dependency-path: '**/package-lock.json'
+      
+      - name: Install pnpm
+        run: npm install -g pnpm
+      
+      - name: Build server
+        run: |
+          cd server
+          pnpm install --frozen-lockfile
+          pnpm run build
+      
+      - name: Build client
+        run: |
+          cd client
+          pnpm install --frozen-lockfile
+          pnpm run build
+      
+      - name: Build mothership
+        run: |
+          cd mothership
+          pnpm install --frozen-lockfile
+          pnpm run build
+      
+      - name: Upload server build
+        uses: actions/upload-artifact@v4
+        with:
+          name: server-build
+          path: server/dist/
+          retention-days: 7
+      
+      - name: Upload client build
+        uses: actions/upload-artifact@v4
+        with:
+          name: client-build
+          path: client/dist/
+          retention-days: 7
+
+  # ==========================================
+  # SECURITY SCAN
+  # ==========================================
+  security:
+    name: 🔒 Security Scan
+    runs-on: ubuntu-latest
+    needs: lint
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'fs'
+          scan-ref: '.'
+          severity: 'CRITICAL,HIGH'
+          exit-code: '1'
+          ignore-unfixed: true
+        continue-on-error: true  # Don't fail build on vulnerabilities, just report
+
+  # ==========================================
+  # Deploy (only on main branch)
+  # ==========================================
+  deploy-staging:
+    name: 🚀 Deploy to Staging
+    runs-on: ubuntu-latest
+    needs: [build, security]
+    if: github.ref == 'refs/heads/main'
+    environment: staging
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Download server build
+        uses: actions/download-artifact@v4
+        with:
+          name: server-build
+          path: server/dist/
+      
+      - name: Deploy notification
+        run: |
+          echo "🎉 Ready to deploy!"
+          echo "Add your deployment commands here (Railway, Vercel, etc.)"
+          # Example for Railway:
+          # curl -X POST ${{ secrets.RAILWAY_DEPLOY_WEBHOOK }}

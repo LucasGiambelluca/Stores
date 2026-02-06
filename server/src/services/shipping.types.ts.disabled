@@ -1,0 +1,159 @@
+/**
+ * Shared Types for Shipping Providers
+ * This file avoids circular dependencies between services
+ */
+
+import { db, storeConfig } from '../db/drizzle.js';
+import { eq } from 'drizzle-orm';
+
+// ============================================
+// Shipping Result Types
+// ============================================
+
+export interface ShipmentResult {
+  success: boolean;
+  trackingNumber: string;
+  labelUrl?: string;
+  labelData?: string; // HTML or base64 PDF
+  estimatedDelivery?: string;
+  carrier: string;
+  carrierResponse?: any;
+  metadata?: Record<string, any>;
+  error?: string;
+}
+
+export interface TrackingEvent {
+  date: string;
+  status: string;
+  location: string;
+  description: string;
+}
+
+export interface TrackingResult {
+  success: boolean;
+  trackingNumber: string;
+  status: string;
+  statusDescription?: string;
+  lastUpdate?: string;
+  estimatedDelivery?: string;
+  events?: TrackingEvent[];
+  carrier: string;
+  error?: string;
+}
+
+// ============================================
+// Shipping Config Types
+// ============================================
+
+export interface ShippingOrigin {
+  name: string;
+  phone: string;
+  address: string;
+  city: string;
+  province: string;
+  postalCode: string;
+  email: string;
+}
+
+export interface CorreoArgentinoCredentials {
+  apiKey: string;
+  agreement: string;
+  env: 'test' | 'production';
+}
+
+export interface AndreaniCredentials {
+  username: string;
+  password: string;
+  clientId: string;
+  env: 'test' | 'production';
+}
+
+export interface ShippingZone {
+  id: string;
+  name: string;
+  cost: number;
+  enabled: boolean;
+}
+
+export interface ShippingConfig {
+  provider: 'manual' | 'correo_argentino' | 'andreani';
+  freeShippingThreshold: number;
+  defaultShippingCost: number;
+  enableLocalPickup: boolean;
+  pickupAddress: string;
+  pickupHours: string;
+  zones: ShippingZone[];
+  origin: ShippingOrigin;
+  correoArgentino: CorreoArgentinoCredentials;
+  andreani: AndreaniCredentials;
+}
+
+// Default config
+const defaultShippingConfig: ShippingConfig = {
+  provider: 'manual',
+  freeShippingThreshold: 50000,
+  defaultShippingCost: 5000,
+  enableLocalPickup: true,
+  pickupAddress: '',
+  pickupHours: 'Lunes a Viernes 10:00 - 18:00',
+  zones: [
+    { id: '1', name: 'AMBA', cost: 5000, enabled: true },
+    { id: '2', name: 'Interior (hasta 500km)', cost: 7000, enabled: true },
+    { id: '3', name: 'Interior (más de 500km)', cost: 9000, enabled: true },
+  ],
+  origin: {
+    name: '',
+    phone: '',
+    address: '',
+    city: '',
+    province: '',
+    postalCode: '',
+    email: '',
+  },
+  correoArgentino: {
+    apiKey: '',
+    agreement: '',
+    env: 'test',
+  },
+  andreani: {
+    username: '',
+    password: '',
+    clientId: '',
+    env: 'test',
+  },
+};
+
+const SHIPPING_CONFIG_KEY = 'shipping_config';
+
+// Cache to avoid async calls in sync functions (populated on first async call)
+let cachedShippingConfig: ShippingConfig | null = null;
+
+// ============================================
+// Get Shipping Config from Database (async)
+// ============================================
+export async function getShippingConfigAsync(): Promise<ShippingConfig> {
+  try {
+    const result = await db.select()
+      .from(storeConfig)
+      .where(eq(storeConfig.key, SHIPPING_CONFIG_KEY))
+      .limit(1);
+
+    if (result.length > 0) {
+      cachedShippingConfig = { ...defaultShippingConfig, ...JSON.parse(result[0].value) };
+      return cachedShippingConfig;
+    }
+  } catch (error) {
+    console.error('Error reading shipping config:', error);
+  }
+  return defaultShippingConfig;
+}
+
+// Sync version that uses cached config (call getShippingConfigAsync first to populate)
+export function getShippingConfig(): ShippingConfig {
+  return cachedShippingConfig ?? defaultShippingConfig;
+}
+
+// Initialize the cache on module load
+getShippingConfigAsync().catch(console.error);
+
+

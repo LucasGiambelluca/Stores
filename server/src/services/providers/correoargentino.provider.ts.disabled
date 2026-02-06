@@ -1,0 +1,555 @@
+/**
+ * Correo Argentino Shipping Provider
+ * API Documentation: Correo Argentino - Plataforma de Integración - Api 2.0
+ * 
+ * Endpoints:
+ * - POST /v1/orders - Create order
+ * - PATCH /v1/orders/{trackingNumber}/cancel - Cancel order
+ * - POST /v1/labels - Get shipping label (PDF base64)
+ * - GET /v1/tracking - Get tracking history
+ * - GET /v1/agencies - Get available agencies/branches
+ * 
+ * Credentials are loaded from database config (via admin panel)
+ */
+
+import { ShipmentResult, TrackingResult, getShippingConfig } from '../shipping.types.js';
+
+// API URLs
+const API_URL_TEST = 'https://apitest.correoargentino.com.ar/paqar/v1';
+const API_URL_PROD = 'https://api.correoargentino.com.ar/paqar/v1';
+
+// Province codes (ISO 3166-2)
+const PROVINCE_CODES: Record<string, string> = {
+  'salta': 'A',
+  'buenos aires': 'B',
+  'ciudad autónoma de buenos aires': 'C',
+  'caba': 'C',
+  'capital federal': 'C',
+  'san luis': 'D',
+  'entre ríos': 'E',
+  'entre rios': 'E',
+  'la rioja': 'F',
+  'santiago del estero': 'G',
+  'chaco': 'H',
+  'san juan': 'J',
+  'catamarca': 'K',
+  'la pampa': 'L',
+  'mendoza': 'M',
+  'misiones': 'N',
+  'formosa': 'P',
+  'neuquén': 'Q',
+  'neuquen': 'Q',
+  'río negro': 'R',
+  'rio negro': 'R',
+  'santa fe': 'S',
+  'tucumán': 'T',
+  'tucuman': 'T',
+  'chubut': 'U',
+  'tierra del fuego': 'V',
+  'corrientes': 'W',
+  'córdoba': 'X',
+  'cordoba': 'X',
+  'jujuy': 'Y',
+  'santa cruz': 'Z',
+};
+
+function getConfig() {
+  return getShippingConfig();
+}
+
+function getApiUrl(): string {
+  const config = getConfig();
+  const env = config.correoArgentino?.env || 'test';
+  return env === 'production' ? API_URL_PROD : API_URL_TEST;
+}
+
+function getHeaders(): Record<string, string> {
+  const config = getConfig();
+  const apiKey = config.correoArgentino?.apiKey;
+  const agreement = config.correoArgentino?.agreement;
+
+  if (!apiKey || !agreement) {
+    throw new Error('API Key y Agreement de Correo Argentino son requeridos. Configurá las credenciales en Admin > Envíos.');
+  }
+
+  return {
+    'Authorization': `Apikey ${apiKey}`,
+    'agreement': agreement,
+    'Content-Type': 'application/json',
+  };
+}
+
+function getProvinceCode(provinceName: string): string {
+  const normalized = provinceName.toLowerCase().trim();
+  return PROVINCE_CODES[normalized] || 'B'; // Default to Buenos Aires
+}
+
+// ============================================
+// Validate Credentials
+// ============================================
+export async function validateCredentials(): Promise<boolean> {
+  try {
+    const response = await fetch(`${getApiUrl()}/auth`, {
+      method: 'GET',
+      headers: getHeaders(),
+    });
+    return response.status === 204;
+  } catch (error) {
+    console.error('Correo Argentino auth error:', error);
+    return false;
+  }
+}
+
+// ============================================
+// Get Available Agencies (Sucursales)
+// ============================================
+export interface Agency {
+  agency_id: string;
+  agency_name: string;
+  location: {
+    street_name: string;
+    street_number: string;
+    city_name: string;
+    state_name: string;
+    zip_code: string;
+    geolocation: {
+      latitude: string;
+      longitude: string;
+    };
+  };
+  schedule: string;
+  phone: string;
+  email: string;
+  pickup_availability: boolean;
+  package_reception: boolean;
+}
+
+// API Error response type
+interface ApiError {
+  message?: string;
+}
+
+export async function getAgencies(stateId?: string): Promise<Agency[]> {
+  try {
+    let url = `${getApiUrl()}/agencies`;
+    const params = new URLSearchParams();
+    if (stateId) params.append('stateId', stateId);
+    if (params.toString()) url += `?${params.toString()}`;
+
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: getHeaders(),
+    });
+
+    if (!response.ok) {
+      const error = await response.json() as ApiError;
+      throw new Error(error.message || 'Error al obtener sucursales');
+    }
+
+    return await response.json() as Agency[];
+  } catch (error) {
+    console.error('Correo Argentino agencies error:', error);
+    return [];
+  }
+}
+
+// ============================================
+// Create Order (Alta de orden)
+// ============================================
+export interface CreateOrderInput {
+  orderId: string;
+  orderNumber: string;
+  customerName: string;
+  customerEmail: string;
+  customerPhone: string;
+  shippingAddress: string;
+  // Parsed address fields
+  streetName?: string;
+  streetNumber?: string;
+  cityName?: string;
+  province?: string;
+  zipCode?: string;
+  floor?: string;
+  department?: string;
+  // Package info
+  weight?: number; // in grams
+  height?: number; // in cm
+  width?: number;  // in cm
+  depth?: number;  // in cm
+  declaredValue?: number;
+  // Options
+  deliveryType?: 'homeDelivery' | 'agency' | 'locker';
+  agencyId?: string;
+  serviceType?: string; // CP = Paq.ar Clasico, EP = Express, etc.
+}
+
+interface OrderResponse {
+  trackingNumber: string;
+  sellerId?: string;
+}
+
+export async function createShipment(input: CreateOrderInput): Promise<ShipmentResult> {
+  try {
+    // Parse address if not already parsed
+    const parsedAddress = parseAddress(input.shippingAddress);
+    const config = getConfig();
+    const origin = config.origin || {};
+    
+    const orderData = {
+      sellerId: config.correoArgentino?.agreement || '',
+      trackingNumber: '', // Let Correo Argentino generate it
+      order: {
+        senderData: {
+          id: config.correoArgentino?.agreement || '',
+          businessName: origin.name || 'Mi Tienda',
+          areaCodePhone: '',
+          phoneNumber: origin.phone || '',
+          areaCodeCellphone: '',
+          cellphoneNumber: '',
+          email: origin.email || '',
+          observation: '',
+          address: {
+            streetName: origin.address || '',
+            streetNumber: '',
+            cityName: origin.city || '',
+            floor: '',
+            department: '',
+            state: getProvinceCode(origin.province || 'Buenos Aires'),
+            zipCode: origin.postalCode || '',
+          },
+        },
+        shippingData: {
+          name: input.customerName,
+          areaCodePhone: '',
+          phoneNumber: input.customerPhone || '',
+          areaCodeCellphone: '',
+          cellphoneNumber: '',
+          email: input.customerEmail,
+          observation: `Pedido: ${input.orderNumber}`,
+          address: {
+            streetName: input.streetName || parsedAddress.street,
+            streetNumber: input.streetNumber || parsedAddress.number,
+            cityName: input.cityName || parsedAddress.city,
+            floor: input.floor || parsedAddress.floor,
+            department: input.department || parsedAddress.dept,
+            state: getProvinceCode(input.province || parsedAddress.province || 'Buenos Aires'),
+            zipCode: input.zipCode || parsedAddress.postalCode,
+          },
+        },
+        parcels: [
+          {
+            dimensions: {
+              height: String(input.height || 10),
+              width: String(input.width || 20),
+              depth: String(input.depth || 30),
+            },
+            productWeight: String(input.weight || 1000), // Default 1kg
+            productCategory: 'Indumentaria',
+            declaredValue: String(input.declaredValue || 0),
+          },
+        ],
+        deliveryType: input.deliveryType || 'homeDelivery',
+        agencyId: input.agencyId || '',
+        saleDate: new Date().toISOString(),
+        serviceType: input.serviceType || 'CP', // Paq.ar Clásico
+        shipmentClientId: input.orderNumber,
+      },
+    };
+
+    const response = await fetch(`${getApiUrl()}/orders`, {
+      method: 'POST',
+      headers: getHeaders(),
+      body: JSON.stringify(orderData),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json() as ApiError;
+      throw new Error(errorData.message || `Error ${response.status}`);
+    }
+
+    const result = await response.json() as OrderResponse;
+
+    return {
+      success: true,
+      trackingNumber: result.trackingNumber,
+      labelUrl: '', // We need to call /labels separately
+      labelData: '',
+      carrier: 'correo_argentino',
+      metadata: {
+        provider: 'correo_argentino',
+        sellerId: result.sellerId,
+        serviceType: input.serviceType || 'CP',
+      },
+    };
+  } catch (error: any) {
+    console.error('Correo Argentino create shipment error:', error);
+    return {
+      success: false,
+      trackingNumber: '',
+      carrier: 'correo_argentino',
+      error: error.message || 'Error al crear envío en Correo Argentino',
+    };
+  }
+}
+
+// ============================================
+// Get Label (Obtener rótulo)
+// ============================================
+export async function getLabel(trackingNumber: string, format: '10x15' | 'label' = '10x15'): Promise<{
+  success: boolean;
+  fileBase64?: string;
+  fileName?: string;
+  error?: string;
+}> {
+  try {
+    const response = await fetch(`${getApiUrl()}/labels?labelFormat=${format}`, {
+      method: 'POST',
+      headers: getHeaders(),
+      body: JSON.stringify([
+        {
+          sellerId: process.env.CORREO_ARG_AGREEMENT || '',
+          trackingNumber: trackingNumber,
+        },
+      ]),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json() as ApiError;
+      throw new Error(errorData.message || `Error ${response.status}`);
+    }
+
+    interface LabelResult {
+      result?: string;
+      status?: string;
+      fileBase64?: string;
+      fileName?: string;
+      filename?: string;
+    }
+
+    const results = await response.json() as LabelResult[];
+    const result = results[0];
+
+    if (result.result === 'OK' || result.status === 'OK') {
+      return {
+        success: true,
+        fileBase64: result.fileBase64,
+        fileName: result.fileName || result.filename,
+      };
+    } else {
+      return {
+        success: false,
+        error: result.result || 'Error al obtener etiqueta',
+      };
+    }
+  } catch (error: any) {
+    console.error('Correo Argentino get label error:', error);
+    return {
+      success: false,
+      error: error.message || 'Error al obtener etiqueta',
+    };
+  }
+}
+
+// ============================================
+// Get Tracking (Consultar historial)
+// ============================================
+export async function getTracking(trackingNumber: string): Promise<TrackingResult> {
+  try {
+    const response = await fetch(`${getApiUrl()}/tracking`, {
+      method: 'GET',
+      headers: {
+        ...getHeaders(),
+      },
+      // Note: The API expects trackingNumbers as a parameter, but docs show it in body
+      // We'll try query params first
+    });
+
+    // If the above doesn't work, we'd need to adjust. For now, try direct fetch
+    const url = new URL(`${getApiUrl()}/tracking`);
+    
+    const trackingResponse = await fetch(url.toString(), {
+      method: 'GET',
+      headers: getHeaders(),
+    });
+
+    if (!trackingResponse.ok) {
+      const errorData = await trackingResponse.json() as ApiError;
+      throw new Error(errorData.message || `Error ${trackingResponse.status}`);
+    }
+
+    interface ApiTrackingEvent {
+      date?: string;
+      status?: string;
+      statusId?: string;
+      facility?: string;
+    }
+
+    interface TrackingResultItem {
+      trackingNumber: string;
+      quantity?: number;
+      event?: ApiTrackingEvent[];
+    }
+
+    const results = await trackingResponse.json() as TrackingResultItem[];
+    const result = results.find((r) => r.trackingNumber === trackingNumber);
+
+    if (!result || result.quantity === 0) {
+      return {
+        success: false,
+        trackingNumber,
+        status: 'unknown',
+        carrier: 'correo_argentino',
+        error: 'No se encontró información de tracking',
+      };
+    }
+
+    // Get the latest event
+    const events = result.event || [];
+    const latestEvent = events[0];
+    
+    return {
+      success: true,
+      trackingNumber,
+      status: mapStatus(latestEvent?.statusId || 'PRE'),
+      statusDescription: latestEvent?.status || 'Pre-imposición',
+      lastUpdate: latestEvent?.date || new Date().toISOString(),
+      events: events.map((e) => ({
+        date: e.date || '',
+        status: e.status || '',
+        location: e.facility || '',
+        description: e.status || '',
+      })),
+      carrier: 'correo_argentino',
+    };
+  } catch (error: any) {
+    console.error('Correo Argentino tracking error:', error);
+    return {
+      success: false,
+      trackingNumber,
+      status: 'error',
+      carrier: 'correo_argentino',
+      error: error.message || 'Error al consultar tracking',
+    };
+  }
+}
+
+// ============================================
+// Cancel Order
+// ============================================
+export async function cancelOrder(trackingNumber: string): Promise<{ success: boolean; message?: string; error?: string }> {
+  try {
+    const response = await fetch(`${getApiUrl()}/orders/${trackingNumber}/cancel`, {
+      method: 'PATCH',
+      headers: getHeaders(),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json() as ApiError;
+      throw new Error(errorData.message || `Error ${response.status}`);
+    }
+
+    interface CancelResponse {
+      mensaje?: string;
+    }
+
+    const result = await response.json() as CancelResponse;
+    return {
+      success: true,
+      message: result.mensaje || 'Pedido cancelado',
+    };
+  } catch (error: any) {
+    console.error('Correo Argentino cancel error:', error);
+    return {
+      success: false,
+      error: error.message || 'Error al cancelar pedido',
+    };
+  }
+}
+
+// ============================================
+// Helper Functions
+// ============================================
+
+function parseAddress(address: string): {
+  street: string;
+  number: string;
+  city: string;
+  province: string;
+  postalCode: string;
+  floor: string;
+  dept: string;
+} {
+  // Simple address parser - in production you'd want something more robust
+  const parts = address.split(',').map(p => p.trim());
+  
+  // Try to extract street and number from first part
+  const streetPart = parts[0] || '';
+  const streetMatch = streetPart.match(/^(.+?)\s+(\d+.*)$/);
+  
+  return {
+    street: streetMatch ? streetMatch[1] : streetPart,
+    number: streetMatch ? streetMatch[2] : '',
+    city: parts[1] || '',
+    province: parts[2] || 'Buenos Aires',
+    postalCode: parts[3] || '',
+    floor: '',
+    dept: '',
+  };
+}
+
+function mapStatus(statusId: string): string {
+  const statusMap: Record<string, string> = {
+    'PRE': 'created',
+    'IMP': 'in_transit',
+    'TRA': 'in_transit',
+    'DIS': 'out_for_delivery',
+    'ENT': 'delivered',
+    'DEV': 'returned',
+    'CAN': 'cancelled',
+    'CAU': 'expired',
+    'REC': 'received',
+    'STO': 'stored',
+  };
+  return statusMap[statusId] || 'unknown';
+}
+
+// ============================================
+// Get Shipping Quote (Estimate)
+// Note: Correo Argentino API doesn't have a direct quote endpoint
+// You'd need to use their rate tables or a separate quoting service
+// ============================================
+export async function getQuote(
+  postalCodeFrom: string,
+  postalCodeTo: string,
+  weight: number, // in grams
+  dimensions?: { height: number; width: number; depth: number }
+): Promise<{
+  success: boolean;
+  price?: number;
+  estimatedDays?: string;
+  error?: string;
+}> {
+  // Correo Argentino doesn't expose a public quoting API
+  // You'd typically use fixed rates based on zones or a separate negotiated rate table
+  // For now, return estimated values based on weight and distance
+  
+  try {
+    // Basic estimation based on weight (you should replace with actual rates)
+    const basePrice = 2500;
+    const pricePerKg = 500;
+    const weightInKg = weight / 1000;
+    
+    const estimatedPrice = basePrice + (weightInKg * pricePerKg);
+    
+    return {
+      success: true,
+      price: Math.round(estimatedPrice),
+      estimatedDays: '3-5 días hábiles',
+    };
+  } catch (error: any) {
+    return {
+      success: false,
+      error: error.message || 'Error al calcular cotización',
+    };
+  }
+}

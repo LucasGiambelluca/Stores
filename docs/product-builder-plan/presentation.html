@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Page Builder - Sprint Plan</title>
+    <style>
+        :root {
+            --primary: #000000;
+            --accent: #3b82f6;
+            --bg: #ffffff;
+            --text: #1f2937;
+            --gray: #f3f4f6;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        .slides-container {
+            height: 100vh;
+            overflow-y: scroll;
+            scroll-snap-type: y mandatory;
+        }
+
+        .slide {
+            height: 100vh;
+            width: 100%;
+            scroll-snap-align: start;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 4rem;
+            position: relative;
+        }
+
+        .slide:nth-child(even) {
+            background-color: var(--gray);
+        }
+
+        h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            text-align: center;
+            line-height: 1.1;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: var(--accent);
+        }
+
+        p {
+            font-size: 1.5rem;
+            max-width: 800px;
+            text-align: center;
+            line-height: 1.6;
+            color: #4b5563;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            max-width: 1400px;
+            width: 100%;
+            align-items: center;
+        }
+
+        .image-container {
+            width: 100%;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            transition: transform 0.3s ease;
+        }
+
+        .image-container:hover {
+            transform: scale(1.02);
+        }
+
+        img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .list {
+            list-style: none;
+            font-size: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .list li {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .list li::before {
+            content: "✓";
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+        }
+
+        .badge-enterprise {
+            background-color: #000;
+            color: #fff;
+        }
+
+        .badge-pro {
+            background-color: var(--accent);
+            color: #fff;
+        }
+
+        .timeline {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            width: 100%;
+            max-width: 1000px;
+        }
+
+        .week {
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .week h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--gray);
+            padding-bottom: 0.5rem;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+            opacity: 0.5;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0) translateX(-50%);}
+            40% {transform: translateY(-10px) translateX(-50%);}
+            60% {transform: translateY(-5px) translateX(-50%);}
+        }
+    </style>
+</head>
+<body>
+    <div class="slides-container">
+        <!-- Slide 1: Title -->
+        <section class="slide">
+            <span class="badge badge-enterprise">Nuevo Feature</span>
+            <h1>Product Page Builder</h1>
+            <p>Sistema de construcción visual para páginas de producto con widgets personalizables y acceso por niveles.</p>
+            <div class="scroll-indicator">↓ Desliza para ver más</div>
+        </section>
+
+        <!-- Slide 2: The Vision -->
+        <section class="slide">
+            <div class="grid">
+                <div>
+                    <h2>La Visión</h2>
+                    <p style="text-align: left; margin-bottom: 2rem;">
+                        Llevar la flexibilidad del Home Builder a la página más importante del e-commerce: el Producto.
+                    </p>
+                    <ul class="list">
+                        <li>Drag & Drop intuitivo</li>
+                        <li>Widgets especializados (Reviews, Specs, Videos)</li>
+                        <li>Diferenciación clara entre planes (Enterprise vs Pro)</li>
+                        <li>Experiencia de usuario premium</li>
+                    </ul>
+                </div>
+                <div class="image-container">
+                    <img src="builder-ui.png" alt="Builder UI Mockup">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 3: Architecture -->
+        <section class="slide">
+            <h2>Arquitectura del Sistema</h2>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; width: 100%; max-width: 1200px; margin-top: 3rem;">
+                <div class="week">
+                    <h3>1. Data Model</h3>
+                    <p style="font-size: 1rem; text-align: left;">
+                        Nuevo esquema <code>ProductPageConfig</code> en la base de datos. Almacena el array de bloques y configuraciones globales (colores, espaciado).
+                    </p>
+                </div>
+                <div class="week">
+                    <h3>2. Block Renderer</h3>
+                    <p style="font-size: 1rem; text-align: left;">
+                        Adaptación del <code>BlockRenderer</code> actual para soportar contexto de producto (pasar <code>product</code> prop a los widgets).
+                    </p>
+                </div>
+                <div class="week">
+                    <h3>3. Widget System</h3>
+                    <p style="font-size: 1rem; text-align: left;">
+                        Descomposición de <code>ProductDetail.tsx</code> en micro-componentes: <code>GalleryWidget</code>, <code>BuyBoxWidget</code>, <code>SpecsWidget</code>.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 4: Tiered Access -->
+        <section class="slide">
+            <div class="grid">
+                <div class="image-container">
+                    <img src="tiered-access.png" alt="Tiered Access Mockup">
+                </div>
+                <div>
+                    <h2>Estrategia de Monetización</h2>
+                    <p style="text-align: left; margin-bottom: 2rem;">
+                        Incentivamos el upgrade limitando la personalización avanzada.
+                    </p>
+                    <div style="display: flex; gap: 2rem; margin-top: 2rem;">
+                        <div style="flex: 1;">
+                            <span class="badge badge-pro">Plan Pro</span>
+                            <ul class="list" style="font-size: 1rem;">
+                                <li>Reordenar secciones básicas</li>
+                                <li>Ocultar/Mostrar Reviews</li>
+                                <li>Cambiar colores de acento</li>
+                            </ul>
+                        </div>
+                        <div style="flex: 1;">
+                            <span class="badge badge-enterprise">Plan Enterprise</span>
+                            <ul class="list" style="font-size: 1rem;">
+                                <li>Widgets de HTML/JS Custom</li>
+                                <li>Banners promocionales</li>
+                                <li>Layouts asimétricos</li>
+                                <li>Video backgrounds</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 5: The Result -->
+        <section class="slide">
+            <h2>Resultados Esperados</h2>
+            <p style="margin-bottom: 3rem;">Tiendas únicas, modernas y optimizadas para conversión.</p>
+            <div class="image-container" style="max-width: 1000px;">
+                <img src="custom-layout.png" alt="Custom Layout Example">
+            </div>
+        </section>
+
+        <!-- Slide 6: Sprint Plan -->
+        <section class="slide">
+            <h2>Plan de Sprint (2 Semanas)</h2>
+            <div class="timeline">
+                <div class="week">
+                    <h3>Semana 1: Core & Backend</h3>
+                    <ul class="list" style="font-size: 1rem;">
+                        <li>Diseño de Schema DB (ProductConfig)</li>
+                        <li>Refactor de ProductDetail a Componentes</li>
+                        <li>Creación de Widgets Base (Gallery, Info)</li>
+                        <li>Setup inicial del Builder en Admin</li>
+                    </ul>
+                </div>
+                <div class="week">
+                    <h3>Semana 2: UI & Permissions</h3>
+                    <ul class="list" style="font-size: 1rem;">
+                        <li>Implementación de Drag & Drop</li>
+                        <li>Lógica de Bloqueo (Pro vs Enterprise)</li>
+                        <li>Widgets Avanzados (Video, Banner)</li>
+                        <li>QA y Testing de Regresión</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
