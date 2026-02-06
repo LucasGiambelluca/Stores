@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Shield, AlertTriangle, CheckCircle, Search, RefreshCw, Lock, Globe, Activity, Zap } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Shield, AlertTriangle, CheckCircle, Search, RefreshCw, Globe, Activity, Zap } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { GlassCard } from '../components/ui/GlassCard';
 import ThreatMap from '../components/watchdog/ThreatMap';

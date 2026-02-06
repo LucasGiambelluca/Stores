@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Key, CheckCircle, Eye, EyeOff, X } from 'lucide-react';
+import { Key, CheckCircle, Eye, EyeOff } from 'lucide-react';
 import Button from '../ui/Button';
 import { changePasswordSchema } from '../../schemas/validation';
 

@@ -1,10 +1,7 @@
-import React from 'react';
 import { motion } from 'framer-motion';
 import { 
   Palette, 
   Zap, 
-  ShieldCheck, 
-  LayoutDashboard, 
   TrendingUp, 
   Gift, 
   Headphones, 

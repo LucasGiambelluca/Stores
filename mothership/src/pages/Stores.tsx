@@ -133,8 +133,8 @@ export default function Stores() {
           store={actionStore}
           onClose={() => setActionStore(null)}
           onResetPassword={(store) => setResetPasswordStore(store)}
-          onSuspend={(id) => suspendMutation(id)}
-          onReactivate={(id) => reactivateMutation(id)}
+          onSuspend={(id) => suspendStore(id)}
+          onReactivate={(id) => reactivateStore(id)}
           onDelete={(id) => setDeleteConfirmId(id)}
         />
       )}

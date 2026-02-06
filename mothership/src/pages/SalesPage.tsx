@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Check, Star, Clock, ShieldCheck } from 'lucide-react';
 import { PRICING_PLANS, FOUNDER_OFFER } from '../data/pricing';
 import Badge from '../components/ui/Badge';

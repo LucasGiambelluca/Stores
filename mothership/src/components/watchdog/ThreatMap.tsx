@@ -1,6 +1,7 @@
-import React, { useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { ComposableMap, Geographies, Geography, Marker, ZoomableGroup } from 'react-simple-maps';
 import { Plus, Minus, Maximize } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const geoUrl = "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json";
 
@@ -98,7 +99,7 @@ export default function ThreatMap({ logs }: ThreatMapProps) {
           onMoveEnd={handleMoveEnd}
           minZoom={1}
           maxZoom={10}
-          filterZoomEvent={(evt) => {
+          filterZoomEvent={(_evt: any) => {
              // Optional: Disable scroll zoom if it interferes with page scroll
              return true; 
           }}
@@ -131,7 +132,7 @@ export default function ThreatMap({ logs }: ThreatMapProps) {
 
           {markers.map((marker) => (
             <Marker key={marker.id} coordinates={marker.coordinates}>
-              <g
+              <motion.g
                 initial={{ scale: 0, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 transition={{ duration: 0.5, type: "spring" }}
@@ -150,7 +151,7 @@ export default function ThreatMap({ logs }: ThreatMapProps) {
                   stroke="#fff" 
                   strokeWidth={1 / position.zoom}
                 />
-              </g>
+              </motion.g>
             </Marker>
           ))}
         </ZoomableGroup>
