@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: limestore-server
+    runtime: node
+    repo: https://github.com/LucasGiambelluca/Stores
+    plan: free
+    rootDir: server
+    buildCommand: pnpm install && pnpm run build
+    startCommand: pnpm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: ENCRYPTION_KEY
+        sync: false
+      - key: MP_ACCESS_TOKEN
+        sync: false
+      - key: MP_PUBLIC_KEY
+        sync: false
+      - key: STORE_URL
+        sync: false

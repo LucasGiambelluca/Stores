@@ -202,6 +202,9 @@ importers:
       '@sentry/node':
         specifier: ^10.35.0
         version: 10.36.0
+      '@types/node':
+        specifier: ^22.9.0
+        version: 22.19.2
       bcryptjs:
         specifier: ^2.4.3
         version: 2.4.3
@@ -253,6 +256,12 @@ importers:
       sharp:
         specifier: ^0.34.5
         version: 0.34.5
+      tsx:
+        specifier: ^4.19.2
+        version: 4.21.0
+      typescript:
+        specifier: ^5.6.3
+        version: 5.8.3
       uuid:
         specifier: ^10.0.0
         version: 10.0.0
@@ -281,9 +290,6 @@ importers:
       '@types/multer':
         specifier: ^2.0.0
         version: 2.0.0
-      '@types/node':
-        specifier: ^22.9.0
-        version: 22.19.2
       '@types/nodemailer':
         specifier: ^7.0.4
         version: 7.0.4
@@ -308,12 +314,6 @@ importers:
       supertest:
         specifier: ^7.1.4
         version: 7.1.4
-      tsx:
-        specifier: ^4.19.2
-        version: 4.21.0
-      typescript:
-        specifier: ^5.6.3
-        version: 5.8.3
       vitest:
         specifier: ^4.0.16
         version: 4.0.16(@opentelemetry/api@1.9.0)(@types/node@22.19.2)(jiti@2.6.1)(lightningcss@1.30.2)(tsx@4.21.0)
