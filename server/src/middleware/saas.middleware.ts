@@ -5,10 +5,11 @@ import { eq } from 'drizzle-orm';
 
 export const saasMiddleware = async (req: Request, res: Response, next: NextFunction) => {
   // Allow access to setup, central, and static files
-  if (req.path.startsWith('/api/setup') || 
-      req.path.startsWith('/api/central') ||
-      req.path.startsWith('/api/saas') || // Allow SaaS management endpoints
-      req.path.startsWith('/api/auth') || // Allow login/recovery even if suspended
+  // Allow access to setup, central, and static files
+  if (req.originalUrl.startsWith('/api/setup') || 
+      req.originalUrl.startsWith('/api/central') ||
+      req.originalUrl.startsWith('/api/saas') || // Allow SaaS management endpoints
+      req.originalUrl.startsWith('/api/auth') || // Allow login/recovery even if suspended
       req.method === 'OPTIONS') {
     return next();
   }
