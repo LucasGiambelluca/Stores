@@ -66,7 +66,7 @@ export function csrfMiddleware(req: Request, res: Response, next: NextFunction) 
   }
   
   // Skip exempt routes
-  const isExempt = EXEMPT_ROUTES.some(route => req.path.startsWith(route));
+  const isExempt = EXEMPT_ROUTES.some(route => req.originalUrl.startsWith(route));
   if (isExempt) {
     return next();
   }
