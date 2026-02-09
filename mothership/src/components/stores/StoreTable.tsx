@@ -10,6 +10,8 @@ interface StoreTableProps {
   onAction: (store: any) => void;
 }
 
+const STORE_URL = import.meta.env.VITE_STORE_URL || 'http://localhost:3005';
+
 export default function StoreTable({ 
   stores, 
   isLoading, 
@@ -123,7 +125,7 @@ export default function StoreTable({
                     {store.id.substring(0, 8)}...
                   </code>
                   <a 
-                    href={`http://localhost:3005?storeId=${store.id}`} 
+                    href={`${STORE_URL}?storeId=${store.id}`} 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-1 text-xs text-blue-600 hover:text-blue-800 font-medium"

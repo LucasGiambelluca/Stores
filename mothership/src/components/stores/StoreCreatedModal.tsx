@@ -9,6 +9,8 @@ interface StoreCreatedModalProps {
   onClose: () => void;
 }
 
+const STORE_URL = import.meta.env.VITE_STORE_URL || 'http://localhost:3005';
+
 export default function StoreCreatedModal({ store, onClose }: StoreCreatedModalProps) {
   if (!store) return null;
 
@@ -34,13 +36,13 @@ export default function StoreCreatedModal({ store, onClose }: StoreCreatedModalP
               <code className="flex-1 text-sm bg-white px-3 py-2 rounded border border-slate-200 font-mono text-slate-800 ">
                 https://{store.domain}.tiendita.app
               </code>
-              <a href={`http://localhost:3005?storeId=${store.id}`} target="_blank" rel="noopener noreferrer"
+              <a href={`${STORE_URL}?storeId=${store.id}`} target="_blank" rel="noopener noreferrer"
                 className="p-2 hover:bg-blue-100 rounded-lg text-blue-600 ">
                 <ExternalLink size={20} />
               </a>
             </div>
             <p className="text-xs text-slate-500 mt-2">
-              * En desarrollo: <a href={`http://localhost:3005?storeId=${store.id}`} target="_blank" className="text-blue-600 underline">localhost:3005</a>
+              * En desarrollo: <a href={`${STORE_URL}?storeId=${store.id}`} target="_blank" className="text-blue-600 underline">Link Directo</a>
             </p>
           </div>
           
