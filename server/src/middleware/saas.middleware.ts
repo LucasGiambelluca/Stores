@@ -8,6 +8,7 @@ export const saasMiddleware = async (req: Request, res: Response, next: NextFunc
   if (req.path.startsWith('/api/setup') || 
       req.path.startsWith('/api/central') ||
       req.path.startsWith('/api/saas') || // Allow SaaS management endpoints
+      req.path.startsWith('/api/auth') || // Allow login/recovery even if suspended
       req.method === 'OPTIONS') {
     return next();
   }
