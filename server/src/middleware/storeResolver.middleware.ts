@@ -169,8 +169,11 @@ export async function storeResolver(req: Request, res: Response, next: NextFunct
     if (!storeDomain) {
       const host = req.headers.host || '';
       // Extract subdomain: "tienda.example.com" -> "tienda"
-      // Skip for localhost and IP addresses
-      if (!host.includes('localhost') && !host.match(/^\d+\.\d+\.\d+\.\d+/)) {
+      // Skip for localhost, IP addresses, Render, and Vercel domains
+      if (!host.includes('localhost') && 
+          !host.includes('onrender.com') && 
+          !host.includes('vercel.app') && 
+          !host.match(/^\d+\.\d+\.\d+\.\d+/)) {
         const parts = host.split('.');
         if (parts.length >= 3) {
           storeDomain = parts[0];
