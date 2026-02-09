@@ -30,10 +30,7 @@ export const globalLimiter = rateLimit({
   standardHeaders: true,
   legacyHeaders: false,
   keyGenerator: storeKeyGenerator,
-  validate: { 
-    xForwardedForHeader: false,
-    keyGenerator: false 
-  },
+  validate: false,
 });
 
 // Strict limiter for auth endpoints (login, register)
@@ -64,10 +61,7 @@ export const uploadLimiter = rateLimit({
   standardHeaders: true,
   legacyHeaders: false,
   keyGenerator: storeKeyGenerator,
-  validate: { 
-    xForwardedForHeader: false,
-    keyGenerator: false 
-  },
+  validate: false,
 });
 
 // Order creation limiter
@@ -82,10 +76,7 @@ export const orderLimiter = rateLimit({
   standardHeaders: true,
   legacyHeaders: false,
   keyGenerator: storeKeyGenerator,
-  validate: { 
-    xForwardedForHeader: false,
-    keyGenerator: false 
-  },
+  validate: false,
 });
 
 // Mothership API limiter (super admin actions)
