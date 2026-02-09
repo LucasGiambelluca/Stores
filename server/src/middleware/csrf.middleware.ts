@@ -18,8 +18,11 @@ const EXEMPT_ROUTES = [
   '/api/auth/login',
   '/api/auth/register',
   '/api/auth/refresh',
-  '/api/webhook', // Webhooks have their own verification
+  '/api/webhook', 
   '/api/health',
+  '/api/mothership', // Mothership uses Bearer tokens
+  '/api/stores',     // Store creation uses Bearer tokens
+  '/api',            // General exemption since we use Header-based Auth (JWT)
 ];
 
 // Methods that require CSRF validation
