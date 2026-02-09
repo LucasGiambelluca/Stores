@@ -26,8 +26,8 @@ const createTransporter = () => {
   if (env.SMTP_HOST) {
     return nodemailer.createTransport({
       host: env.SMTP_HOST,
-      port: 465,
-      secure: true,
+      port: 587,
+      secure: false, // Use STARTTLS
       auth: {
         user: 'resend',
         pass: env.SMTP_PASS,
@@ -322,16 +322,21 @@ export const sendNewSaasSaleNotification = async (adminEmail: string, sale: {
 async function sendEmail(to: string, subject: string, htmlContent: string, actionButton?: { text: string; url: string }) {
   try {
     const html = wrapTemplate(subject, htmlContent, actionButton);
-    const info = await transporter.sendMail({
-      from: `"${BRAND.name}" <${process.env.SMTP_FROM || 'onboarding@resend.dev'}>`,
+    
+    // Don't wait too long for email - 10s timeout
+    const timeoutPromise = new Promise((_, reject) => setTimeout(() => reject(new Error('Email timeout')), 10000));
+    const sendPromise = transporter.sendMail({
+      from: `"${BRAND.name}" <${env.SMTP_USER || 'onboarding@resend.dev'}>`, // Use configured user or fallback
       to,
       subject,
       html,
     });
+
+    const info = await Promise.race([sendPromise, timeoutPromise]) as any;
     console.log(`✅ Email sent to ${to} [${info.messageId}]`);
     return true;
   } catch (error) {
-    console.error(`❌ Failed to send email to ${to}:`, error);
-    return false;
+    console.warn(`⚠️ Failed to send email to ${to} (non-blocking):`, error);
+    return false; // Return false but don't throw to avoid crashing the request
   }
 }
