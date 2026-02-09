@@ -26,15 +26,12 @@ const createTransporter = () => {
   if (env.SMTP_HOST) {
     return nodemailer.createTransport({
       host: env.SMTP_HOST,
-      port: parseInt(env.SMTP_PORT || '587'),
-      secure: env.SMTP_SECURE === 'true',
+      port: 465,
+      secure: true,
       auth: {
-        user: env.SMTP_USER,
+        user: 'resend',
         pass: env.SMTP_PASS,
       },
-      tls: {
-        rejectUnauthorized: env.NODE_ENV === 'production'
-      }
     });
   }
 
