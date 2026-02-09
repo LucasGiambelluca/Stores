@@ -114,12 +114,14 @@ const allowedOrigins = [
   'http://localhost:3005',
 ];
 const productionDomainPattern = /^https:\/\/([a-z0-9-]+\.)?tiendita\.app$/;
+const vercelDomainPattern = /^https:\/\/.*\.vercel\.app$/;
 
 app.use(cors({
   origin: (origin, callback) => {
     if (!origin) return callback(null, true);
     if (allowedOrigins.includes(origin)) return callback(null, true);
     if (productionDomainPattern.test(origin)) return callback(null, true);
+    if (vercelDomainPattern.test(origin)) return callback(null, true);
     if (!isProduction && origin.includes('localhost')) return callback(null, true);
     
     console.warn(`⚠️ CORS blocked origin: ${origin}`);
