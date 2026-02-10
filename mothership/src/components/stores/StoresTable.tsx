@@ -16,6 +16,8 @@ interface StoresTableProps {
   stores: Store[];
 }
 
+const STORE_URL = import.meta.env.VITE_STORE_URL || 'http://localhost:3005';
+
 export default function StoresTable({ stores }: StoresTableProps) {
   const [copiedSerial, setCopiedSerial] = useState<string | null>(null);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
@@ -204,11 +206,7 @@ export default function StoresTable({ stores }: StoresTableProps) {
                           <div className="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-2xl border border-gray-200 z-20 overflow-hidden">
                             {store.domain && (
                               <a
-                                href={
-                                  window.location.hostname.includes('localhost') || window.location.hostname.includes('127.0.0.1')
-                                    ? `http://localhost:3005?storeId=${store.id}`
-                                    : `https://${store.domain}.tiendita.app`
-                                }
+                                href={`${STORE_URL}?storeId=${store.id}`}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="w-full px-4 py-3 text-left text-sm hover:bg-gray-50 flex items-center gap-3 text-gray-700 transition-colors"
