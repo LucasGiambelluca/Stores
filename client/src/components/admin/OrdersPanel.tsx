@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { AdminLayout } from './AdminLayout';
 import { useAuth } from '../../context/AuthContext';
+import { API_BASE } from '../../context/storeApi';
 import { getStoreHeaders } from '../../utils/storeDetection';
 import { 
   ShoppingCart, Package, Truck, CheckCircle, XCircle, Clock,
-  Eye, RefreshCw, Search, Filter, ChevronDown, Loader2, Printer, Tag, ExternalLink, FileImage, ThumbsUp, ThumbsDown
+  Eye, RefreshCw, Search, Filter, ChevronDown, Loader2, Printer, Tag, ExternalLink, FileImage, ThumbsUp, ThumbsDown, Calendar, X
 } from 'lucide-react';
 
 interface OrderItem {
@@ -77,7 +78,7 @@ export const AdminOrdersPanel: React.FC = () => {
       const params = new URLSearchParams();
       if (filterStatus !== 'all') params.append('status', filterStatus);
       
-      const response = await fetch(`/api/admin/orders?${params}`, {
+      const response = await fetch(`${API_BASE}/admin/orders?${params}`, {
         headers: { 
           Authorization: `Bearer ${token}`,
           ...getStoreHeaders()
@@ -102,7 +103,7 @@ export const AdminOrdersPanel: React.FC = () => {
   // Fetch order details
   const fetchOrderDetails = async (orderId: string) => {
     try {
-      const response = await fetch(`/api/orders/${orderId}`, {
+      const response = await fetch(`${API_BASE}/orders/${orderId}`, {
         headers: { 
           Authorization: `Bearer ${token}`,
           ...getStoreHeaders()
@@ -122,7 +123,7 @@ export const AdminOrdersPanel: React.FC = () => {
   // Update order status
   const updateOrderStatus = async (orderId: string, status: string) => {
     try {
-      const response = await fetch(`/api/admin/orders/${orderId}/status`, {
+      const response = await fetch(`${API_BASE}/admin/orders/${orderId}/status`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -148,7 +149,7 @@ export const AdminOrdersPanel: React.FC = () => {
   const generateShippingLabel = async (orderId: string) => {
     setGeneratingLabel(true);
     try {
-      const response = await fetch('/api/admin/shipping/create', {
+      const response = await fetch(`${API_BASE}/admin/shipping/create`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -178,7 +179,7 @@ export const AdminOrdersPanel: React.FC = () => {
   // Fetch shipment info for an order
   const fetchShipmentInfo = async (orderId: string) => {
     try {
-      const response = await fetch(`/api/admin/shipping/${orderId}`, {
+      const response = await fetch(`${API_BASE}/admin/shipping/${orderId}`, {
         headers: { 
           Authorization: `Bearer ${token}`,
           ...getStoreHeaders()
@@ -445,7 +446,7 @@ export const AdminOrdersPanel: React.FC = () => {
                           onClick={async () => {
                             if (!confirm('¿Aprobar este comprobante y marcar como pagado?')) return;
                             try {
-                              const res = await fetch(`/api/admin/orders/${selectedOrder.id}/verify-receipt`, {
+                              const res = await fetch(`${API_BASE}/admin/orders/${selectedOrder.id}/verify-receipt`, {
                                 method: 'POST',
                                 headers: {
                                   'Content-Type': 'application/json',
@@ -470,7 +471,7 @@ export const AdminOrdersPanel: React.FC = () => {
                             const reason = prompt('Motivo del rechazo:');
                             if (!reason) return;
                             try {
-                              const res = await fetch(`/api/admin/orders/${selectedOrder.id}/verify-receipt`, {
+                              const res = await fetch(`${API_BASE}/admin/orders/${selectedOrder.id}/verify-receipt`, {
                                 method: 'POST',
                                 headers: {
                                   'Content-Type': 'application/json',

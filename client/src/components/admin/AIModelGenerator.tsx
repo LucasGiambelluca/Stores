@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Sparkles, Loader2, X, RefreshCw } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { getStoreHeaders } from '../../utils/storeDetection';
+import { API_BASE } from '../../context/storeApi';
 
 // Updated model images (full body with diverse body types)
 const MODEL_OPTIONS = [
@@ -81,7 +82,7 @@ export const AIModelGenerator: React.FC<AIModelGeneratorProps> = ({
     try {
       const storeHeaders = getStoreHeaders();
       
-      const response = await fetch('/api/ai/try-on', {
+      const response = await fetch(`${API_BASE}/ai/try-on`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -6,6 +6,7 @@ import { useWishlist } from '../context/WishlistContext';
 import { useToast } from './Toast';
 import { StoreLink as Link } from './StoreLink';
 import { QuickViewModal } from './QuickViewModal';
+import { API_BASE } from '../context/storeApi';
 
 interface ProductCardProps {
   product: Product;
@@ -74,7 +75,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, index = 0, on
       onMouseLeave={() => setIsHovered(false)}
       onClick={() => {
         // Track click (fire and forget)
-        fetch(`/api/products/${product.id}/click`, {
+        fetch(`${API_BASE}/products/${product.id}/click`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' }
         }).catch(err => console.error('Error tracking click:', err));

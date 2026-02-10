@@ -2,6 +2,7 @@
 import React, { useState, useRef } from 'react';
 import { Sparkles, Loader2, X, Upload, Camera, RefreshCw } from 'lucide-react';
 import { getStoreHeaders } from '../utils/storeDetection';
+import { API_BASE } from '../context/storeApi';
 
 interface StorefrontAIGeneratorProps {
   garmentImageUrl: string;
@@ -47,7 +48,7 @@ export const StorefrontAIGenerator: React.FC<StorefrontAIGeneratorProps> = ({
     try {
       const storeHeaders = getStoreHeaders();
       
-      const response = await fetch('/api/ai/try-on', {
+      const response = await fetch(`${API_BASE}/ai/try-on`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

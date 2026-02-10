@@ -2,6 +2,7 @@ import React, { createContext, useContext, useState, ReactNode, useEffect } from
 import { CartItem, Product } from '../types';
 import { useAuth } from './AuthContext';
 import { getStoreHeaders } from '../utils/storeDetection';
+import { API_BASE } from './storeApi';
 
 interface CartContextType {
   items: CartItem[];
@@ -50,7 +51,7 @@ export const CartProvider = ({ children }: { children?: ReactNode }) => {
         const sessionId = getSessionId();
         const storeHeaders = getStoreHeaders();
         
-        await fetch('/api/cart/save', {
+        await fetch(`${API_BASE}/cart/save`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

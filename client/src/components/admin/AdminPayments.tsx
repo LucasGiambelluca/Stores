@@ -3,6 +3,7 @@ import { CreditCard, Banknote, QrCode, Check, AlertCircle, Wallet } from 'lucide
 import { AdminLayout } from './AdminLayout';
 import { useAuth } from '../../context/AuthContext';
 import { getStoreHeaders } from '../../utils/storeDetection';
+import { API_BASE } from '../../context/storeApi';
 
 // Payments configuration admin page
 export const AdminPayments: React.FC = () => {
@@ -61,7 +62,7 @@ export const AdminPayments: React.FC = () => {
     // Load saved config from API
     const fetchConfig = async () => {
       try {
-        const response = await fetch('/api/admin/payments/config', {
+        const response = await fetch(`${API_BASE}/admin/payments/config`, {
           headers: { 
             'Authorization': `Bearer ${token}`,
             ...getStoreHeaders()
@@ -86,7 +87,7 @@ export const AdminPayments: React.FC = () => {
 
   const handleSave = async () => {
     try {
-      const response = await fetch('/api/admin/payments/config', {
+      const response = await fetch(`${API_BASE}/admin/payments/config`, {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',

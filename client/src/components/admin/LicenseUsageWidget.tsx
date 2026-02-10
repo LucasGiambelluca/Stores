@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Package, ShoppingCart, AlertTriangle } from 'lucide-react';
+import { HardDrive, TrendingUp, AlertCircle, Database, Package, ShoppingCart, AlertTriangle } from 'lucide-react';
+import { getStoreHeaders } from '@/src/utils/storeDetection';
+import { API_BASE } from '../../context/storeApi';
 
 interface LicenseUsage {
   productCount: number;
@@ -25,7 +27,7 @@ export default function LicenseUsageWidget({ compact = false }: LicenseUsageWidg
     const fetchUsage = async () => {
       try {
         const token = sessionStorage.getItem('token');
-        const response = await fetch('/api/license/usage', {
+        const response = await fetch(`${API_BASE}/license/usage`, {
           headers: {
             'Authorization': `Bearer ${token}`,
           },

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Shield, AlertTriangle, CheckCircle, Clock, Package, ShoppingCart, Crown, Zap } from 'lucide-react';
 import { useStoreConfig } from '../../context/StoreContext';
 import { ActivateLicenseModal } from './ActivateLicenseModal';
+import { API_BASE } from '../../context/storeApi';
 
 interface LicenseInfo {
   activated: boolean;
@@ -36,7 +37,7 @@ export const LicenseWidget: React.FC = () => {
   const fetchLicenseStatus = async () => {
     try {
       const storeId = sessionStorage.getItem('tiendita_store_id');
-      const response = await fetch('/api/license/status', {
+      const response = await fetch(`${API_BASE}/license/status`, {
         headers: {
           'x-store-id': storeId || ''
         }

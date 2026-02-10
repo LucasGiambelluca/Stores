@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import { Lock, Loader2, CheckCircle, AlertCircle } from 'lucide-react';
 import { useStoreConfig } from '../../context/StoreContext';
+import { API_BASE } from '../../context/storeApi';
 
 export const ResetPasswordPage: React.FC = () => {
   const [searchParams] = useSearchParams();
@@ -37,7 +38,7 @@ export const ResetPasswordPage: React.FC = () => {
     setStatus('idle');
 
     try {
-      const response = await fetch('/api/auth/reset-password', {
+      const response = await fetch(`${API_BASE}/auth/reset-password`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ token, newPassword: password }),

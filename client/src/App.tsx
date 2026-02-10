@@ -13,6 +13,7 @@ import { HeroSlider, FeaturesSection, CategorySection, PromoSection } from './co
 import { ProductGrid } from './components/ProductComponents';
 import { BlockRenderer } from './components/blocks/BlockRenderer';
 import { ProductDetail } from './components/ProductDetail';
+import { API_BASE } from './context/storeApi';
 import { CartSidebar } from './components/CartSidebar';
 import { CheckoutForm } from './components/CheckoutForm';
 import { WhatsAppButton } from './components/WhatsAppButton';
@@ -196,7 +197,7 @@ const AppContent: React.FC = () => {
               console.log('[App] Direct product link detected, fetching storeId from product:', productId);
               
               try {
-                const productResponse = await fetch(`/api/products/${productId}`);
+                const productResponse = await fetch(`${API_BASE}/products/${productId}`);
                 if (productResponse.ok) {
                   const productData = await productResponse.json();
                   if (productData.storeId) {

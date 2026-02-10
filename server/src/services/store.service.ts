@@ -253,6 +253,20 @@ export class StoreService {
       updatedAt: new Date(),
     });
 
+    // Initialize Default Config (Auto-setup)
+    await db.insert(storeConfig).values([
+      { storeId, key: 'is_configured', value: 'true' },
+      { storeId, key: 'store_name', value: name },
+      { storeId, key: 'store_email', value: ownerEmail },
+      { storeId, key: 'store_description', value: 'Tienda creada desde Mothership' },
+      // Default Theme
+      { storeId, key: 'theme_primary', value: '#111111' },
+      { storeId, key: 'theme_secondary', value: '#ffffff' },
+      { storeId, key: 'theme_accent', value: '#E5B800' },
+      { storeId, key: 'theme_background', value: '#0a0a0a' },
+      { storeId, key: 'theme_text', value: '#ffffff' },
+    ]);
+
     console.log(`✅ Store created: ${name} (${storeId}) - waiting for license`);
 
     return {

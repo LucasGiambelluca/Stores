@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { TrendingUp, Award, Lock } from 'lucide-react';
 import { useStoreConfig } from '../../context/StoreContext';
 import { getStoreHeaders } from '@/src/utils/storeDetection';
+import { API_BASE } from '../../context/storeApi';
 import { UpgradeModal } from './UpgradeModal';
 
 interface AnalyticsData {
@@ -31,7 +32,7 @@ export const AnalyticsDashboard: React.FC = () => {
       try {
         const token = sessionStorage.getItem('token');
         const storeHeaders = getStoreHeaders();
-        const response = await fetch('/api/admin/analytics/dashboard', {
+        const response = await fetch(`${API_BASE}/admin/analytics/dashboard`, {
           headers: {
             'Authorization': `Bearer ${token}`,
             ...storeHeaders

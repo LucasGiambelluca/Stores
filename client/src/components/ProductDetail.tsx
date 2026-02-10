@@ -7,6 +7,7 @@ import { STORE_INFO } from '../constants';
 import { useCart } from '../context/CartContext';
 import { useProducts, useStoreConfig, useProductPageConfig } from '../context/StoreContext';
 import { useWishlist } from '../context/WishlistContext';
+import { API_BASE } from '../context/storeApi';
 import { Navbar, Footer } from './Layout';
 import { ProductCard } from './ProductComponents';
 import { SizeCalculator } from './SizeCalculator';
@@ -300,7 +301,7 @@ export const ProductDetail: React.FC = () => {
       setIsLoadingProduct(true);
       
       // Fetch product directly by ID (without storeId - API will return it)
-      fetch(`/api/products/${id}`)
+      fetch(`${API_BASE}/products/${id}`)
         .then(res => res.json())
         .then(data => {
           if (data.product) {
@@ -331,7 +332,7 @@ export const ProductDetail: React.FC = () => {
       
       // Track view in analytics (fire and forget)
       // We don't await this as it shouldn't block the UI
-      fetch(`/api/products/${product.id}/view`, {
+      fetch(`${API_BASE}/products/${product.id}/view`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

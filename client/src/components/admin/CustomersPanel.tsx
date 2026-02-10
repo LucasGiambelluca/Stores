@@ -5,6 +5,7 @@ import {
   Users, Search, Mail, Phone, ShoppingBag, DollarSign, 
   Eye, XCircle, Loader2, UserCheck, UserX, ChevronDown
 } from 'lucide-react';
+import { API_BASE } from '../../context/storeApi';
 
 interface Customer {
   id: string;
@@ -61,7 +62,7 @@ export const AdminCustomersPanel: React.FC = () => {
       const params = new URLSearchParams();
       if (searchQuery) params.append('search', searchQuery);
       
-      const response = await fetch(`/api/admin/customers?${params}`, {
+      const response = await fetch(`${API_BASE}/admin/customers?${params}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       
@@ -81,7 +82,7 @@ export const AdminCustomersPanel: React.FC = () => {
     setIsLoading(true);
     
     try {
-      const response = await fetch(`/api/admin/customers/guests`, {
+      const response = await fetch(`${API_BASE}/admin/customers/guests`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       
@@ -107,7 +108,7 @@ export const AdminCustomersPanel: React.FC = () => {
   // Fetch customer details
   const fetchCustomerDetails = async (customerId: string) => {
     try {
-      const response = await fetch(`/api/admin/customers/${customerId}`, {
+      const response = await fetch(`${API_BASE}/admin/customers/${customerId}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       

@@ -6,6 +6,7 @@ import { useCoupon } from '../context/CouponContext';
 import { CheckCircle, ArrowLeft, Lock, Loader2, Upload, FileCheck } from 'lucide-react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { getStoreHeaders } from '../utils/storeDetection';
+import { API_BASE } from '../context/storeApi';
 import { ConfettiCelebration, useConfetti } from './ConfettiCelebration';
 
 // Subcomponents
@@ -92,7 +93,7 @@ export const CheckoutForm: React.FC = () => {
     
     setIsLoadingShipping(true);
     try {
-      const response = await fetch('/api/shipping/quote', {
+      const response = await fetch(`${API_BASE}/shipping/quote`, {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',
@@ -146,7 +147,7 @@ export const CheckoutForm: React.FC = () => {
 
     try {
       // 1. Create order
-      const orderResponse = await fetch('/api/orders', {
+      const orderResponse = await fetch(`${API_BASE}/orders`, {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',
@@ -183,7 +184,7 @@ export const CheckoutForm: React.FC = () => {
 
       // 2. Handle payment based on method
       if (paymentMethod === 'mercadopago') {
-        const mpResponse = await fetch('/api/payments/preference', {
+        const mpResponse = await fetch(`${API_BASE}/payments/preference`, {
           method: 'POST',
           headers: { 
             'Content-Type': 'application/json',
@@ -215,7 +216,7 @@ export const CheckoutForm: React.FC = () => {
           throw new Error('Error al crear el pago');
         }
       } else if (paymentMethod === 'modo') {
-        const modoResponse = await fetch('/api/payments/modo/intention', {
+        const modoResponse = await fetch(`${API_BASE}/payments/modo/intention`, {
           method: 'POST',
           headers: { 
             'Content-Type': 'application/json',
@@ -368,7 +369,7 @@ export const CheckoutForm: React.FC = () => {
                             const storeHeaders = getStoreHeaders();
                             
                             // Use public receipt upload endpoint (supports images + PDF)
-                            const uploadRes = await fetch('/api/upload/receipt', {
+                            const uploadRes = await fetch(`${API_BASE}/upload/receipt`, {
                               method: 'POST',
                               headers: storeHeaders,
                               body: formData,
@@ -381,7 +382,7 @@ export const CheckoutForm: React.FC = () => {
                             
                             const { url } = await uploadRes.json();
                             
-                            await fetch(`/api/orders/${orderId}/receipt`, {
+                            await fetch(`${API_BASE}/orders/${orderId}/receipt`, {
                               method: 'POST',
                               headers: { 
                                 'Content-Type': 'application/json',

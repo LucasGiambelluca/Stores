@@ -22,6 +22,7 @@ import { Bar, Doughnut, Line } from 'react-chartjs-2';
 import * as XLSX from 'xlsx';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
+import { API_BASE } from '../../context/storeApi';
 
 // Register Chart.js components
 ChartJS.register(
@@ -117,7 +118,7 @@ export const AdminReportsPanel: React.FC = () => {
       
       if (startDate) params.append('startDate', startDate);
       
-      const response = await fetch(`/api/admin/reports/sales?${params}`, {
+      const response = await fetch(`${API_BASE}/admin/reports/sales?${params}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       

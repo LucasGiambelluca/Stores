@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { Upload, X, Image as ImageIcon, Loader2, AlertCircle } from 'lucide-react';
 import { getStoreHeaders } from '@/src/utils/storeDetection';
+import { API_BASE } from '../../context/storeApi';
 
 interface ImageUploadProps {
   value: string;
@@ -42,7 +43,7 @@ export const ImageUpload: React.FC<ImageUploadProps> = ({
       formData.append('image', file);
 
       const storeHeaders = getStoreHeaders();
-      const response = await fetch('/api/upload/product', {
+      const response = await fetch(`${API_BASE}/upload/product`, {
         method: 'POST',
         headers: {
           ...(token && { Authorization: `Bearer ${token}` }),
@@ -242,7 +243,7 @@ export const MultiImageUpload: React.FC<MultiImageUploadProps> = ({
       validFiles.forEach((file) => formData.append('images', file));
 
       const storeHeaders = getStoreHeaders();
-      const response = await fetch('/api/upload/products', {
+      const response = await fetch(`${API_BASE}/upload/products`, {
         method: 'POST',
         headers: {
           ...(token && { Authorization: `Bearer ${token}` }),

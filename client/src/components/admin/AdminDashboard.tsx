@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import { 
-  DollarSign, ShoppingBag, Package, Users, Truck, Clock, CheckCircle, AlertCircle, 
-  TrendingUp, Calendar
-} from 'lucide-react';
+import { BarChart3, Users, ShoppingBag, DollarSign, TrendingUp, Package, Clock, Truck, CheckCircle } from 'lucide-react';
 import { useStoreConfig } from '../../context/StoreContext';
+import { useAuth } from '../../context/AuthContext';
+import { API_BASE } from '../../context/storeApi';
 import { AdminLayout } from './AdminLayout';
 import { LowStockAlert } from './LowStockAlert';
 import { getStoreHeaders } from '@/src/utils/storeDetection';
@@ -24,7 +23,7 @@ export const AdminDashboard: React.FC = () => {
       try {
         const token = sessionStorage.getItem('token');
         const storeHeaders = getStoreHeaders();
-        const response = await fetch('/api/admin/dashboard', {
+        const response = await fetch(`${API_BASE}/admin/dashboard`, {
           headers: {
             'Authorization': `Bearer ${token}`,
             ...storeHeaders

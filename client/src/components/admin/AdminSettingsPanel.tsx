@@ -3,6 +3,7 @@ import { useStoreConfig } from '../../context/StoreContext';
 import { AdminLayout } from './AdminLayout';
 import { ImageUpload } from './ImageUpload';
 import { getStoreHeaders } from '@/src/utils/storeDetection';
+import { API_BASE } from '../../context/storeApi';
 
 // Settings Admin Page
 export const AdminSettings: React.FC = () => {
@@ -18,7 +19,7 @@ export const AdminSettings: React.FC = () => {
       // Guardar en el servidor (BD)
       const token = sessionStorage.getItem('token');
       const storeHeaders = getStoreHeaders();
-      const response = await fetch('/api/admin/config', {
+      const response = await fetch(`${API_BASE}/admin/config`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

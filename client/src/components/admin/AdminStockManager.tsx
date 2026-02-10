@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Package, Search, AlertTriangle, Edit2, Save, X, RefreshCw } from 'lucide-react';
 import { AdminLayout } from './AdminLayout';
 import { getStoreHeaders } from '../../utils/storeDetection';
+import { API_BASE } from '../../context/storeApi';
 
 interface ProductStock {
   id: string;
@@ -26,7 +27,7 @@ export const AdminStockManager: React.FC = () => {
   const fetchProducts = async () => {
     setLoading(true);
     try {
-      const response = await fetch('/api/products?limit=500', {
+      const response = await fetch(`${API_BASE}/products?limit=500`, {
         headers: getStoreHeaders()
       });
       const data = await response.json();
@@ -54,7 +55,7 @@ export const AdminStockManager: React.FC = () => {
     try {
       const token = sessionStorage.getItem('token'); // Fixed: was 'auth_token'
       
-      const response = await fetch(`/api/admin/products/${productId}`, {
+      const response = await fetch(`${API_BASE}/admin/products/${productId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

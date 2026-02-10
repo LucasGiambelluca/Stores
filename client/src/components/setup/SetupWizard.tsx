@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Check, ArrowRight, ArrowLeft, Store, Palette, Mail, Rocket } from 'lucide-react';
 import { getStoreHeaders } from '../../utils/storeDetection';
+import { API_BASE } from '../../context/storeApi';
 import './SetupStyles.css';
 
 // Types
@@ -276,7 +277,7 @@ export const SetupWizard: React.FC<SetupWizardProps> = ({ onComplete }) => {
     setUploadingLogo(true);
     try {
       // Get Cloudinary config from server
-      const configRes = await fetch('/api/config', {
+      const configRes = await fetch(`${API_BASE}/config`, {
         headers: getStoreHeaders()
       });
       const config = await configRes.json();
@@ -327,7 +328,7 @@ export const SetupWizard: React.FC<SetupWizardProps> = ({ onComplete }) => {
       const storeId = urlParams.get('storeId') || sessionStorage.getItem('tiendita_store_id');
 
       // 1. Create/Update Store & Admin User
-      const setupResponse = await fetch('/api/setup', {
+      const setupResponse = await fetch(`${API_BASE}/setup`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

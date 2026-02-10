@@ -1,0 +1,60 @@
+src/components/blocks/PremiumHeroBanner.tsx(194,25): error TS2322: Type '{ hidden: { y: number; opacity: number; }; visible: { y: number; opacity: number; transition: { type: string; stiffness: number; damping: number; }; }; }' is not assignable to type 'Variants'.
+  Property 'visible' is incompatible with index signature.
+    Type '{ y: number; opacity: number; transition: { type: string; stiffness: number; damping: number; }; }' is not assignable to type 'Variant'.
+      Type '{ y: number; opacity: number; transition: { type: string; stiffness: number; damping: number; }; }' is not assignable to type 'TargetAndTransition'.
+        Type '{ y: number; opacity: number; transition: { type: string; stiffness: number; damping: number; }; }' is not assignable to type '{ transition?: Transition<any>; transitionEnd?: ResolvedValues; }'.
+          Types of property 'transition' are incompatible.
+            Type '{ type: string; stiffness: number; damping: number; }' is not assignable to type 'Transition<any>'.
+              Type '{ type: string; stiffness: number; damping: number; }' is not assignable to type 'TransitionWithValueOverrides<any>'.
+                Type '{ type: string; stiffness: number; damping: number; }' is not assignable to type 'ValueAnimationTransition<any>'.
+                  Types of property 'type' are incompatible.
+                    Type 'string' is not assignable to type 'AnimationGeneratorType'.
+src/components/blocks/PremiumHeroBanner.tsx(211,15): error TS2322: Type '{ hidden: { y: number; opacity: number; }; visible: { y: number; opacity: number; transition: { type: string; stiffness: number; damping: number; }; }; }' is not assignable to type 'Variants'.
+  Property 'visible' is incompatible with index signature.
+    Type '{ y: number; opacity: number; transition: { type: string; stiffness: number; damping: number; }; }' is not assignable to type 'Variant'.
+      Type '{ y: number; opacity: number; transition: { type: string; stiffness: number; damping: number; }; }' is not assignable to type 'TargetAndTransition'.
+        Type '{ y: number; opacity: number; transition: { type: string; stiffness: number; damping: number; }; }' is not assignable to type '{ transition?: Transition<any>; transitionEnd?: ResolvedValues; }'.
+          Types of property 'transition' are incompatible.
+            Type '{ type: string; stiffness: number; damping: number; }' is not assignable to type 'Transition<any>'.
+              Type '{ type: string; stiffness: number; damping: number; }' is not assignable to type 'TransitionWithValueOverrides<any>'.
+                Type '{ type: string; stiffness: number; damping: number; }' is not assignable to type 'ValueAnimationTransition<any>'.
+                  Types of property 'type' are incompatible.
+                    Type 'string' is not assignable to type 'AnimationGeneratorType'.
+src/components/blocks/PremiumHeroBanner.tsx(236,15): error TS2322: Type '{ hidden: { y: number; opacity: number; }; visible: { y: number; opacity: number; transition: { type: string; stiffness: number; damping: number; }; }; }' is not assignable to type 'Variants'.
+  Property 'visible' is incompatible with index signature.
+    Type '{ y: number; opacity: number; transition: { type: string; stiffness: number; damping: number; }; }' is not assignable to type 'Variant'.
+      Type '{ y: number; opacity: number; transition: { type: string; stiffness: number; damping: number; }; }' is not assignable to type 'TargetAndTransition'.
+        Type '{ y: number; opacity: number; transition: { type: string; stiffness: number; damping: number; }; }' is not assignable to type '{ transition?: Transition<any>; transitionEnd?: ResolvedValues; }'.
+          Types of property 'transition' are incompatible.
+            Type '{ type: string; stiffness: number; damping: number; }' is not assignable to type 'Transition<any>'.
+              Type '{ type: string; stiffness: number; damping: number; }' is not assignable to type 'TransitionWithValueOverrides<any>'.
+                Type '{ type: string; stiffness: number; damping: number; }' is not assignable to type 'ValueAnimationTransition<any>'.
+                  Types of property 'type' are incompatible.
+                    Type 'string' is not assignable to type 'AnimationGeneratorType'.
+src/components/blocks/PremiumHeroBanner.tsx(244,23): error TS2322: Type '{ hidden: { y: number; opacity: number; }; visible: { y: number; opacity: number; transition: { type: string; stiffness: number; damping: number; }; }; }' is not assignable to type 'Variants'.
+  Property 'visible' is incompatible with index signature.
+    Type '{ y: number; opacity: number; transition: { type: string; stiffness: number; damping: number; }; }' is not assignable to type 'Variant'.
+      Type '{ y: number; opacity: number; transition: { type: string; stiffness: number; damping: number; }; }' is not assignable to type 'TargetAndTransition'.
+        Type '{ y: number; opacity: number; transition: { type: string; stiffness: number; damping: number; }; }' is not assignable to type '{ transition?: Transition<any>; transitionEnd?: ResolvedValues; }'.
+          Types of property 'transition' are incompatible.
+            Type '{ type: string; stiffness: number; damping: number; }' is not assignable to type 'Transition<any>'.
+              Type '{ type: string; stiffness: number; damping: number; }' is not assignable to type 'TransitionWithValueOverrides<any>'.
+                Type '{ type: string; stiffness: number; damping: number; }' is not assignable to type 'ValueAnimationTransition<any>'.
+                  Types of property 'type' are incompatible.
+                    Type 'string' is not assignable to type 'AnimationGeneratorType'.
+src/components/molecules/FormField/index.tsx(2,35): error TS2307: Cannot find module '../atoms/Input' or its corresponding type declarations.
+src/components/molecules/PriceDisplay/index.tsx(2,23): error TS2307: Cannot find module '../atoms/Typography' or its corresponding type declarations.
+src/components/molecules/QuantitySelector/index.tsx(3,28): error TS2307: Cannot find module '../atoms/Icon' or its corresponding type declarations.
+src/components/molecules/SearchBar/index.tsx(3,23): error TS2307: Cannot find module '../atoms/Input' or its corresponding type declarations.
+src/components/organisms/CartSidebar/index.tsx(111,50): error TS2345: Argument of type 'CartItem' is not assignable to parameter of type 'Product'.
+  Type 'CartItem' is missing the following properties from type 'Product': category, subcategory, sizes
+src/components/product-widgets/Product3DViewer.tsx(51,11): error TS2339: Property 'model-viewer' does not exist on type 'JSX.IntrinsicElements'.
+src/components/product-widgets/Product3DViewer.tsx(63,11): error TS2339: Property 'model-viewer' does not exist on type 'JSX.IntrinsicElements'.
+src/components/QuickViewModal.tsx(28,24): error TS2345: Argument of type 'string | ProductColor' is not assignable to parameter of type 'SetStateAction<string>'.
+  Type 'ProductColor' is not assignable to type 'SetStateAction<string>'.
+src/components/SmartCartRecommendations.tsx(24,59): error TS2339: Property 'category' does not exist on type 'CartItem'.
+src/components/SmartCartRecommendations.tsx(25,62): error TS2339: Property 'subcategory' does not exist on type 'CartItem'.
+src/components/SmartCartRecommendations.tsx(30,46): error TS2345: Argument of type 'string | number' is not assignable to parameter of type 'string'.
+  Type 'number' is not assignable to type 'string'.
+src/components/VirtualTryOn.tsx(489,49): error TS2367: This comparison appears to be unintentional because the types '"error" | "idle" | "success"' and '"loading"' have no overlap.
+src/components/VirtualTryOn.tsx(491,40): error TS2367: This comparison appears to be unintentional because the types '"error" | "idle" | "success"' and '"loading"' have no overlap.

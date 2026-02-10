@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Key, X, CheckCircle, AlertTriangle } from 'lucide-react';
+import { Key, X, Loader2, CheckCircle, AlertCircle, AlertTriangle } from 'lucide-react';
+import { API_BASE } from '../../context/storeApi';
 
 interface ActivateLicenseModalProps {
   isOpen: boolean;
@@ -29,7 +30,7 @@ export const ActivateLicenseModal: React.FC<ActivateLicenseModalProps> = ({ isOp
 
     try {
       const token = sessionStorage.getItem('token');
-      const response = await fetch('/api/license/activate', {
+      const response = await fetch(`${API_BASE}/license/activate`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

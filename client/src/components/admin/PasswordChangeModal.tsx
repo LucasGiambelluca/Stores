@@ -1,5 +1,7 @@
+
 import React, { useState } from 'react';
-import { AlertTriangle, Lock } from 'lucide-react';
+import { X, Lock, Loader2, CheckCircle, AlertCircle, AlertTriangle } from 'lucide-react';
+import { API_BASE } from '../../context/storeApi';
 import { useAuth } from '../../context/AuthContext';
 import { getStoreHeaders } from '../../utils/storeDetection';
 
@@ -36,7 +38,7 @@ export const PasswordChangeModal: React.FC<PasswordChangeModalProps> = ({ isOpen
 
     try {
       const token = sessionStorage.getItem('token');
-      const response = await fetch('/api/auth/password', {
+      const response = await fetch(`${API_BASE}/auth/password`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

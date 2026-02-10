@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { Package, Truck, CheckCircle, Clock, AlertCircle, ShoppingBag, ChevronRight, Calendar, DollarSign } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { API_BASE } from '../context/storeApi';
 
 interface Order {
   id: string;
@@ -28,7 +29,7 @@ export const UserOrders: React.FC = () => {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const response = await fetch('/api/orders/my', {
+        const response = await fetch(`${API_BASE}/orders/my`, {
           headers: {
             'Authorization': `Bearer ${token}`
           }
